@@ -13,7 +13,11 @@ const schema = new Schema({
     name:{
         type: String,
         required: true
+    },
+    role: {
+        type:String,
+        required: true
     }
-},{timestamps: true})
+})
 
-export const modelo = model("user", schema);
+export const modelStakeHolder = model("stakeHolder", schema);
