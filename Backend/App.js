@@ -5,7 +5,14 @@ import { authRouter } from "./routes/auth.router.js";
 import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
 export const app = express();
 
+import cors from 'cors'
+const corsOptions ={
+    origin:'*'
+}
+app.use(cors(corsOptions));
+
 app.use(express.json({limit: "1KB"}))
+
 app.use(expressSession({
     name: "felipe.sid",
     resave: false,

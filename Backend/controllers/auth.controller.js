@@ -14,8 +14,8 @@ export const login = async (req, res) => {
     const user = await modelConductor.findOne({username: req.body.username})
     if(!user){ 
         const userStake = await modelStakeHolder.findOne({username: req.body.username});
-        if(!userStake){
-            res.status(404).json({message: 'The User is not register.'})
+        if(userStake == null){
+            return res.status(404).json({message: 'The User is not register.'})
         }
         const isPasswordCorrect = await compare(req.body.password, userStake.password)
         if(!isPasswordCorrect){ return res.status(401).json({message: 'Password does not exists.'})}
