@@ -5,6 +5,8 @@ import { authRouter } from "./routes/auth.router.js";
 import { viajeSHRouter } from "./routes/viajeSH.router.js";
 import { viajeRouter } from "./routes/viaje.router.js"
 import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
+
+
 export const app = express();
 
 import cors from 'cors'
@@ -17,13 +19,13 @@ app.use(express.json({limit: "1KB"}))
 
 app.use(expressSession({
     name: "felipe.sid",
-    resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    resave: true,
     secret: SESSION_SECRET,
     cookie: {
         secure: IS_PRODUCTION,
         maxAge: 1000*60*60*24
-    }
+    },
 }))
 app.use('/api', authRouter)
 app.use('/api', viajeRouter)

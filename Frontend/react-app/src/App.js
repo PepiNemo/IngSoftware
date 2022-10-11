@@ -1,6 +1,6 @@
 import NavBar from './Nav'
-import HomePage from './Homepage'
 import FormPedirViaje from './formPedirViaje'
+import CreateSH from './Holder.js'
 import Login from './Login.js'
 import { Routes, Route, useNavigate } from "react-router-dom";
 
@@ -15,12 +15,14 @@ function App() {
 
   return(
     <div>
-    
-    
-    <Routes>
-      <Route path="/" element={<><NavBar/><FormPedirViaje /> </>}/>
-      <Route path="/Login" element={<Login />}/>
-    </Routes> 
+      <NavBar />
+      
+      <Routes>
+        <Route path="/createSH" element={<CreateSH />} />
+
+        <Route path="/" element={<FormPedirViaje />}/>
+        <Route path="/Login" element={<Login />}/>
+      </Routes> 
 
     </div>
 

@@ -1,6 +1,5 @@
 import './Form.css' 
-import {BrowserRouter, Link, Route} from "react-router-dom";
-//import { Link, Route, Switch } from 'wouter'
+import {Link} from "react-router-dom";
 
  function Nav(){
 
@@ -32,8 +31,10 @@ import {BrowserRouter, Link, Route} from "react-router-dom";
       
        <header>
 
-       <Link class="active" to="/Login"> Login </Link>
-       <Link class="active" onClick={Logout}> Cerrar Session </Link>
+        <Link class="active" to="/"> Inicio </Link>
+        <Link class="active" to="/Login"> Login </Link>
+        <Link class="active" to="/createSH"> Crear StakeHolder </Link>
+        <Link class="active" onClick={Logout}> Cerrar Session </Link>
 
        </header>
 
