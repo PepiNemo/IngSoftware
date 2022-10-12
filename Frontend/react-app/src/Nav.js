@@ -1,33 +1,30 @@
 import './Form.css' 
 import {Link} from "react-router-dom";
-
+import axios from 'axios'
  function Nav(){
 
   const Logout = () => {
-      const url = "http://localhost:3300/api/logout"
-      
+      const url = "http://localhost:3300/api/logout" 
+
       const options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "User-Agent": "Thunder Client (https://www.thunderclient.com)"
-        }
+        credentials: 'include'
       }
+
       fetch(url, options)
         .then(response => {
-          console.log(response, "Holo")
-          if(response.status === 200){
-            alert("Has cerrado session")
-          }else{
-            alert('Necesitas haber iniciado Sesion para cerrar')
-          }
-        })
+            if(response.ok){
+              alert("Se ha cerrado sesion exitosamente")
+              //console.log(response.json())
+            }
+            else{alert("Debes primero iniciar sesion para Cerrar.")}
+          })
         .catch(e => console.log(e))
   }
 
   return  ( 
     
-      <div className="topnav">
+    <div className="topnav">
       
        <header>
 
@@ -38,8 +35,6 @@ import {Link} from "react-router-dom";
 
        </header>
 
-      
-    
   </div> )
     
 }

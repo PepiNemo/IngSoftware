@@ -8,40 +8,37 @@ function Holder(){
     const navigate = useNavigate()
 
     const [formValues, setFormValues] = useState({
-        "username": "",
-        "password": "",
-        "name": "",
-        "role": "stakeHolder"
+        username: "",
+        password: "",
+        name: "",
     })
 
     const handleChange = (event) => {
         const {name, value} = event.target
         setFormValues({...formValues, [name]:value})
-        console.log(name, value)
     }
 
     const onSubmit = (event)=> {
         event.preventDefault()
 
         const url = "http://localhost:3300/api/admin/registerStakeHolder"
-        const jeuy = JSON.stringify(formValues)
-        console.log(jeuy)
         const options = {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            "User-Agent": "Thunder Client (https://www.thunderclient.com)"
-          },
-          body: jeuy
+          credentials: 'include',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify(formValues)
         }
+
         fetch(url, options)
-          .then(response => {
-            console.log(response.status, "Holo")
-            if(response.status === 200){
-                alert("Usuario StakeHolder creado.")
-                navigate("/")
-            }else{
-              alert('Usuario y/o contraseña incorrecto')
+          .then(response => {          
+            if(response.status == 201){
+              alert("Stake Holder registrado correctamente")
+              navigate("/")
+            }else if(response.status == 403){
+              alert("Debes ser Administrador para crear un Stake Holder")
+            }
+            else{
+              const a = response.json().then(json => alert(json.message[0].message))
             }
           })
           .catch(e => console.log(e))

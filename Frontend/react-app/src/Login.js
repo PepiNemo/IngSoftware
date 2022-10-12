@@ -2,6 +2,11 @@ import './style.css'
 import { useState } from 'react'
 import { useNavigate} from 'react-router-dom'
 
+export var token  = ""
+const setToken = (newToken) => {
+  token = newToken
+}
+
 function Login() {
 
     const navigate = useNavigate()
@@ -14,35 +19,30 @@ function Login() {
     const handleChange = (event) => {
       const {name, value} = event.target
       setFormValues({...formValues, [name]: value})
-      console.log(name, value)
     } 
+
   
     const onSubmit = (event)=> {
       event.preventDefault()
-  
-  
+
       const url = "http://localhost:3300/api/login"
-      const jeuy = JSON.stringify(formValues)
-      console.log(jeuy)
+
       const options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "User-Agent": "Thunder Client (https://www.thunderclient.com)"
-        },
-        body: jeuy
+        credentials: 'include',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(formValues)
       }
+
       fetch(url, options)
         .then(response => {
-          console.log(response.status, "Holo")
-          if(response.status === 200){
-            navigate("/")
+          if(!response.ok){
+            response.json().then(json => alert(json.message))
           }else{
-            alert('Usuario y/o contraseña incorrecto')
+            alert("Has iniciado sesion")
+            navigate("/")
           }
-        })
-        .catch(e => console.log(e))
-  
+        })  
     }
   
     return (
