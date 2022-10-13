@@ -29,7 +29,7 @@ export const login = async (req, res) => {
         if(!isPasswordCorrect){ return res.status(401).json({message: 'Password does not exists.'})}
         req.session.role="conductor";
         req.session.userId = user.id;
-        res.json({message: 'Conductor: you are successfuly logged in'});
+        res.json({"message": 'Conductor: you are successfuly logged in'});
 
     }
     else if(user.role == "admin"){
@@ -38,7 +38,6 @@ export const login = async (req, res) => {
         req.session.role="admin";
         req.session.userId = user.id;
         res.json({message: 'Admin: you are successfuly logged in'});
-
 
     }
     

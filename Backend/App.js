@@ -10,10 +10,12 @@ import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
 export const app = express();
 
 import cors from 'cors'
-const corsOptions ={
-    origin:'*'
-}
-app.use(cors(corsOptions));
+app.use(cors({
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: ['http://localhost:3000']
+}));
+
 
 app.use(express.json({limit: "1KB"}))
 
@@ -24,7 +26,8 @@ app.use(expressSession({
     secret: SESSION_SECRET,
     cookie: {
         secure: IS_PRODUCTION,
-        maxAge: 1000*60*60*24
+        maxAge: 1000*60*60*24,
+        httpOnly: false
     },
 }))
 app.use('/api', authRouter)

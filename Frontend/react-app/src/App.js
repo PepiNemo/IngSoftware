@@ -1,5 +1,5 @@
 import NavBar from './Nav'
-import FormPedirViaje from './formPedirViaje'
+import FormPedirViaje from './formPedirViajes2.js'
 import CreateSH from './Holder.js'
 import Login from './Login.js'
 import { Routes, Route } from "react-router-dom";
