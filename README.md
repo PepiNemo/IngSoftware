@@ -24,7 +24,7 @@ Finalmente levantamos el backend en el puerto correspondiente.
 
 Nos dirigimos a la carpeta del Frontend
 
-`cd IngSoftware/Frontend/`
+`cd IngSoftware/Frontend/react-app`
 
 Instalamos las dependencias utilizadas en el proyecto
 
