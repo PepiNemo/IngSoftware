@@ -1,9 +1,10 @@
 import express from "express";
 import expressSession from 'express-session';
-import { adminRouter } from "./routes/admin.router.js";
 import { authRouter } from "./routes/auth.router.js";
-import { viajeSHRouter } from "./routes/viajeSH.router.js";
-import { viajeRouter } from "./routes/viaje.router.js"
+import { adminRouter } from "./routes/admin.router.js";
+import { conductorRouter } from "./routes/conductor.router.js";
+import { stakeRouter } from "./routes/stake.router.js"
+import { pasajeroRouter } from "./routes/pasajero.router.js"
 import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
 
 
@@ -30,10 +31,12 @@ app.use(expressSession({
         httpOnly: false
     },
 }))
+
 app.use('/api', authRouter)
-app.use('/api', viajeRouter)
 app.use('/api/admin', adminRouter)
-app.use("api/SH", viajeSHRouter )
+app.use('/api/conductor', conductorRouter)
+app.use('/api/stakeHolder', stakeRouter)
+app.use('/api/pasajero', pasajeroRouter)
 
 export const applicacion = app;
 

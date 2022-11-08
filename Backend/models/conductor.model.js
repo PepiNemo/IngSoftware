@@ -1,22 +1,38 @@
 import { Schema, model } from "mongoose";
 
 const schema = new Schema({
-    username: {
+    Nombre: {
+        type: String,
+        required: true,
+    },
+    Celular: {
+        type: Number,
+        required: true,
+    },
+    Correo: {
+        type: String,
+        required: true,
+    },
+    Username: {
         type: String,
         required: true,
         unique: true
     },
-    password:{
+    Contraseña:{
         type: String, 
         required: true
     },
-    name:{
-        type: String,
+    Prioridad:{
+        type: Number,
         required: true
     },
-    role: {
-        type:String,
-        required: true
+    Imagen_URL: {
+        type: String,
+        required: true,
+    },
+    Rol: {
+        type: String,
+        required: true,
     }
 })
 

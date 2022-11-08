@@ -19,23 +19,23 @@ export const login = async (req, res) => {
         }
         const isPasswordCorrect = await compare(req.body.password, userStake.password)
         if(!isPasswordCorrect){ return res.status(401).json({message: 'Password does not exists.'})}
-        req.session.role="stake holder"
+        req.session.Rol="stake holder"
         req.session.userId = userStake.id;
         res.json({message: 'Stake Holder: you are successfuly logged in'});
 
     
-    }else if(user.role == "conductor"){ 
+    }else if(user.Rol == "conductor"){ 
         const isPasswordCorrect = await compare(req.body.password, user.password)
         if(!isPasswordCorrect){ return res.status(401).json({message: 'Password does not exists.'})}
-        req.session.role="conductor";
+        req.session.Rol="conductor";
         req.session.userId = user.id;
         res.json({"message": 'Conductor: you are successfuly logged in'});
 
     }
-    else if(user.role == "admin"){
+    else if(user.Rol == "admin"){
         const isPasswordCorrect = await compare(req.body.password, user.password)
         if(!isPasswordCorrect){ return res.status(401).json({message: 'Password does not exists.'})}
-        req.session.role="admin";
+        req.session.Rol="admin";
         req.session.userId = user.id;
         res.json({message: 'Admin: you are successfuly logged in'});
 
