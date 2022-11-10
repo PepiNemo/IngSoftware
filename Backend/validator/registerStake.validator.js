@@ -3,10 +3,10 @@ import Validator from "fastest-validator";
 const v = new Validator();
 
 const schema = {
-    username: { type: "string", min: 3, max:20},
-    password: {type: "string", min:9, max:20},
-    name: { type: "string", min:3 , max:60},
-    $$strict: true
+    Username: { type: "string", min: 3, max:20},
+    Password: {type: "string", min:9, max:20},
+    Nombre_Empresa: { type: "string", min:3 , max:60},
+    //$$strict: true
 }
 
 export const RegisterStakeChecker = v.compile(schema);

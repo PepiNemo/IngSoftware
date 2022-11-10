@@ -5,7 +5,7 @@ const schema = new Schema({
         type: String, 
         required: true
     },
-    Rut:{
+    Rut_Empresa:{
         type: Number, 
         required: true,
         unique: true
@@ -23,7 +23,7 @@ const schema = new Schema({
         required: true,
         unique: true
     },
-    Contraseña:{
+    Password:{
         type: String, 
         required: true
     },

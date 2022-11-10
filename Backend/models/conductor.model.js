@@ -18,7 +18,7 @@ const schema = new Schema({
         required: true,
         unique: true
     },
-    Contraseña:{
+    Password:{
         type: String, 
         required: true
     },

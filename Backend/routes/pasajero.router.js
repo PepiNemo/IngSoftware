@@ -8,7 +8,7 @@ import  {
 
 const router = Router();
 
-router.post("/createViajeSH", createViaje);
+router.post("/createViaje", createViaje);
 router.patch("/actualizarViaje", updateViaje);
 router.delete("/removeViajeSH", removeViaje);
 

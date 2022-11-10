@@ -1,4 +1,6 @@
 import { modelConductor } from "../models/conductor.model.js";
+import { RegisterConductorChecker } from "../validator/registerConductor.validator.js"
+import { hash } from "bcrypt";
 
 export const aceptarViaje = async (req, res) => {
     return res.status(201).json({ message: 'you are accept succefully travel.'})
@@ -16,8 +18,8 @@ export const createConductor = async (req, res) => {
     const validatorResult = RegisterConductorChecker(req.body);
     if (validatorResult !== true) { return res.status(400).json({ message: validatorResult }) }
 
-    const hashedPassword = await hash(req.body.password, 12);
-    const user = await modelConductor.create({ ...req.body, password: hashedPassword, role: 'conductor' })
+    const hashedPassword = await hash(req.body.Password, 12);
+    const user = await modelConductor.create({ ...req.body, Password: hashedPassword, Rol: 'conductor' })
 
     return res.status(201).json({ message: 'you are registered succefully.'})
 }

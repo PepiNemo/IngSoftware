@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { loginRequiredAdmin } from "../controllers/admin.controller.js"
+
 import {
     aceptarViaje,
     rechazarViaje,
@@ -11,28 +13,27 @@ import {
 } from "../controllers/conductor.controller.js"
 
 import {
-    registerStakeHolder,
+    createStakeHolder,
     readStakeHolder,
     readStakeHolders,
-    removeStakeHolder,
-    loginRequired
+    removeStakeHolder
 } from "../controllers/stake.controller.js";
 const router = Router();
 
-router.post("/aceptarViaje", loginRequired, aceptarViaje);
-router.post("/rechazarViaje", loginRequired, rechazarViaje);
-router.get("/verViajesAceptados", loginRequired, verViajesAceptados);
+router.post("/aceptarViaje", loginRequiredAdmin, aceptarViaje);
+router.post("/rechazarViaje", loginRequiredAdmin, rechazarViaje);
+router.get("/verViajesAceptados", loginRequiredAdmin, verViajesAceptados);
 
 
-router.post("/createConductor", loginRequired, createConductor);
-router.get("/createConductor", loginRequired, readConductors);
-router.get("/readConductor", loginRequired, readConductor);
-router.delete("/removeConductor", loginRequired, removeConductor);
+router.post("/createConductor", loginRequiredAdmin, createConductor);
+router.get("/readConductors", loginRequiredAdmin, readConductors);
+router.get("/readConductor", loginRequiredAdmin, readConductor);
+router.delete("/removeConductor", loginRequiredAdmin, removeConductor);
 
-router.post("/registerStakeHolder", loginRequired, registerStakeHolder);
-router.get("/readStakeHolders", loginRequired, readStakeHolders);
-router.get("/readStakeHolder", loginRequired, readStakeHolder);
-router.delete("/removeStakeHolder", loginRequired, removeStakeHolder);
+router.post("/createStakeHolder", loginRequiredAdmin, createStakeHolder);
+router.get("/readStakeHolders", loginRequiredAdmin, readStakeHolders);
+router.get("/readStakeHolder", loginRequiredAdmin, readStakeHolder);
+router.delete("/removeStakeHolder", loginRequiredAdmin, removeStakeHolder);
 
 
 export const adminRouter = router;
