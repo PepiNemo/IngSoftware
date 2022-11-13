@@ -28,7 +28,7 @@ export const removeStakeHolder = async (req, res) => {
 }
 
 export const loginRequiredStake = async (req, res, next) => {
-    if(!req.session || !req.session.userId || req.session.role!="stake holder"){ 
+    if(!req.session || !req.session.userId || req.session.Rol!="stake holder"){ 
         return res.status(403).json({message: "You should login with user stake holder for acces to this route."});
     }
     

@@ -1,25 +1,48 @@
 import React, { useState } from "react";
-import { FormImput, FormImput2 } from "./formImput";
-//import { FormImput2 } from "./formImput2";
+import { FormImput } from "./formImput";
+//import { FormImput } from "./FormImput";
 import { Foter } from "./Foter";
+import { useNavigate } from 'react-router-dom'
 
 
-function Formulario2() {
+function FormViaje() {
+  const navigate = useNavigate()
   const [formValues, setFromValues] = useState({
-    nombre_del_pasajero: "",
-    direccionOrigen: "",
-    direccionDestino: "",
-    contacto: "",
-    fecha: "",
-    Hinicio: "",
-    tamaño: "Pequeña",
-    n_pasajeros: "1",
-    n_maletas: "",
+    Nombre_Pasajero: "",
+    Dire_Inicio: "",
+    Dire_Destino: "",
+    Celular: "",
+    Correo: "",
+    Fecha: "",  
+    Hora_Inicio: "",
+    Tamaño_Maletas: "Mediana",
+    Numero_Pasajeros: "1",
+    Numero_Maletas: "",
+    Estado_Viaje: "Solicitado"
   });
   
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(JSON.stringify(formValues));
+    const url = "http://localhost:3300/api/pasajero/createViaje"
+
+    console.log(JSON.stringify(formValues))
+    const options = {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(formValues)
+    }
+
+    fetch(url, options)
+      .then(response => {
+        if (!response.ok) {
+          alert("Codigo de error desde el servidor")
+          response.json().then(json => alert(json.message))
+        } else {
+          response.json().then(json => alert(json.message))
+          navigate("/")
+        }
+    })
   };
   
   const handleChange = (event) => {
@@ -28,15 +51,15 @@ function Formulario2() {
   };
   
   const changeFunc = () => {
-    var selectBox = document.getElementById("tamaño");
+    var selectBox = document.getElementById("Tamaño_Maletas");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    setFromValues({ ...formValues, [formValues.tamaño]: selectedValue });
+    setFromValues({ ...formValues, Tamaño_Maletas: selectedValue });
   };
   
   const changeFunc2 = () => {
-    var selectBox = document.getElementById("tamaño");
+    var selectBox = document.getElementById("Numero_Pasajeros");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    setFromValues({ ...formValues, [formValues.n_pasajeros]: selectedValue });
+    setFromValues({ ...formValues, Numero_Pasajeros: selectedValue });
   };
 
   return (
@@ -44,84 +67,91 @@ function Formulario2() {
       <div className="container">
         <span className="title"> Formulario General</span>
         <form className="row g-3">
-          <FormImput label="Email" type="email" name="email" />
+
+          
 
           <FormImput
             label="Nombre del pasajero"
             type="text"
-            name="nombre_del_pasajero"
+            name="Nombre_Pasajero"
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput 
+            label="Email" 
+            type="email" 
+            name="Correo" 
+            onChange={handleChange} 
+            />
+
+          <FormImput
             label="Direccionn de Origen"
             type="text"
-            name="direccionOrigen"
+            name="Dire_Inicio"
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput
             label="Direcion destino"
             type="text"
-            name="direccionDestino"
+            name="Dire_Destino"
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput
             label="Telefono de contacto"
             type="text"
-            name="contacto"
+            name="Celular"
             onChange={handleChange}
           />
 
           <FormImput
             label="Fecha"
             type="text"
-            name="fecha"
+            name="Fecha"
             onChange={handleChange}
           />
 
           <FormImput
             label="Hora inicio"
             type="text"
-            name="Hinicio"
+            name="Hora_Inicio"
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput
             label="Numero de Maletas"
             type="text"
-            name="n_maletas"
+            name="Numero_Maletas"
             onChange={handleChange}
           />
 
           <div className="col-md-6">
             <label
-              for="n_pasajeros"
+              for="Numero_Pasajeros"
               htmlFor="inputState"
               className="form-label"
             >
               Pasajero/s
             </label>
             <select
-              id="n_pasajeros"
+              id="Numero_Pasajeros"
               className="form-select"
-              onChange={changeFunc}
+              onChange={changeFunc2}
             >
-              <option selected=""></option>
-              <option> 1 </option>
-              <option> 2 </option>
-              <option> 3 </option>
-              <option> 4 </option>
+              <option value="0"> 0 </option>
+              <option value="1"> 1 </option>
+              <option value="2"> 2 </option>
+              <option value="3"> 3 </option>
+              <option value="4"> 4 </option>
             </select>
           </div>
 
           <div className="col-md-6">
-            <label for="tamaño" htmlFor="inputState" className="form-label">
-              Tamaño de Maletas
+            <label for="Tamaño_Maletas" htmlFor="inputState" className="form-label">
+              Tamaño_Maletas de Maletas
             </label>
-            <select id="tamaño" className="form-select" onChange={changeFunc}>
-              <option selected=""></option>
+            <select id="Tamaño_Maletas" className="form-select" defaultValue={"Mediana"} onChange={changeFunc}>
               <option value="Pequeña"> Pequeña </option>
               <option value="Mediana"> Mediana </option>
               <option value="Grande"> Grande </option>
@@ -140,4 +170,4 @@ function Formulario2() {
     </div>
   );
 }
-export default Formulario2;
+export default FormViaje;

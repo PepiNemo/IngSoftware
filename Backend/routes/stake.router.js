@@ -4,6 +4,8 @@ import { loginRequiredStake } from "../controllers/stake.controller.js"
 
 import  { 
     createViajeSH,
+    readViajeSH,
+    readViajesSH,
     updateViajeSH,
     removeViajeSH, 
 } from "../controllers/viajeSH.controller.js"

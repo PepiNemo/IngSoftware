@@ -1,0 +1,7 @@
+Admin 
+user: admin 
+password: superadmin 
+
+Stake holder 
+user: stakeholder
+password: stakeholder

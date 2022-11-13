@@ -4,15 +4,24 @@ import { dbSecretFields } from "../configs/index.js";
 
 export const createViaje = async (req, res) => {
     const viaje= await modelViaje.create({...req.body,})
-    return res.status(201).json({message: 'Vaije tomado.', viaje:omit(viaje.toObject(), dbSecretFields )})
+    return res.status(201).json({message: 'Viaje pedido.', viaje:omit(viaje.toObject(), dbSecretFields )})
 }
 
 export const readViaje = async (req, res) => {
-    return res.status(201).json({ message: 'you are read succefully viaje.'})
+    const{Name_Id, Value} = req.body;
+    const Viaje = await modelViaje.findOne({[Name_Id]:Value});
+    (Viaje == null)
+    ? res.status(404).json({ message: 'There is no travel for this id.'})
+    : res.status(200).json(Viaje)
 }
 
 export const readViajes = async (req, res) => {
-    return res.status(201).json({ message: 'you are read succefully viajes.'})
+    const{Name_Id, Value} = req.body;
+    const Viaje = await modelViaje.find({[Name_Id]:Value});
+    (Viaje == null)
+        ? res.status(404).json({ message: 'There is no travel for this id.'})
+        : res.status(200).json(Viaje)
+    
 }
 
 

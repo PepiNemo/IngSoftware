@@ -10,15 +10,19 @@ const schema = new Schema({
         required: true
     },
     Fecha_Hora_Inicio:{
-        type: Date, 
+        type: String, 
         required: false
     },
-    Direccion_Origen:{
+    Direccion_Origen1:{
+        type: String, 
+        required: true
+    },
+    Direccion_Destino1:{
         type: String, 
         required: true
     },
     Fecha_Hora_Termino:{
-        type: Date, 
+        type: String, 
         required: false
     },
     Id_SH:{
@@ -50,12 +54,12 @@ const schema = new Schema({
         required: true,
     },
     Tamaño_Equipaje:{
-        type: Map,
+        type: String,
         required: true,
     },
     Detalles_Extras:{
         type: Number,
-        required: true,
+        required: false,
     }
 })
 export const modelViajeSH = model("ViajesSH", schema);

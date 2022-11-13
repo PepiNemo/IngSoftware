@@ -1,33 +1,60 @@
 import { Schema, model } from "mongoose";
 
 const schema = new Schema({
-    name: {
+    Nombre_Pasajero: {
         type: String,
         required: true,
         unique: false
     },
-    number:{
+    Celular:{
         type: String, 
         required: true
     },
-    dire_inicio:{
+    Correo:{
+        type: String, 
+        required: true
+    },
+    Numero_Pasajeros:{
+        type: Number,
+        required: true
+    },
+    Dire_Inicio:{
         type: String,
         required: true
     },
-    dire_destino: {
+    Dire_Destino: {
         type:String,
         required: true
     },
-    hora: {
-        type:String,
-        required: true
-    },
-    fecha:{
+    Fecha:{
         type: String,
         required: true
     },
-    metodo_pago:{
-        Type: String,
+    Hora_Inicio: {
+        type:String,
+        required: true
+    },
+    Numero_Maletas: {
+        type: Number,
+        required: false
+    },
+    Tamaño_Maletas: {
+        type: String,
+        required: false
+    },
+    Metodo_pago:{
+        type: String
+    },
+    Estado_Viaje:{
+        type: String,
+        required: true
+    },
+    Id_Conductor: {
+        type: String,
+        required: false
+    },
+    Detalles_Extras:{
+        type:String
     }
 })
 export const modelViaje = model("ViajesComune", schema);

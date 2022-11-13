@@ -21,6 +21,7 @@ function ViajeStake() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+        //http://localhost:3300/api/stakeHolder/createViajeSH
     console.log(JSON.stringify(formValues));
   };
 
