@@ -3,26 +3,45 @@ import { FormImput, FormImput2 } from "./formImput";
 import { useNavigate } from "react-router-dom";
 
 function ViajeStake() {
+  const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
-    date: "",
-    direccionOrigen: "",
-    direccionDestino: "",
-    Hinicio: "",
-    Htermino: "",
-    nombreEmpresa: "",
-    nombreStake: "",
-    nombreRepre: "",
-    contacto: "",
-    n_pasajeros: "",
-    n_maletas: "",
-    t_equi: "Pequeña",
-    extra: "",
+    Id_SH: "3",
+    Direccion_Origen1: "",
+    Direccion_Destino1: "",
+    Fecha_Hora_Inicio: "",
+    Fecha_Hora_Termino: "",
+    Nombre_Empresa: "",
+    Nombre_StakeHolder: "",
+    Nombre_Pasajero_Representante: "",
+    Celular_Pasajero_Representante: "",
+    Numero_Pasajeros: "",
+    Numero_Maletas: "",
+    Tamaño_Equipaje: "Pequeña",
+    Detalles_Extras: "",
+    Estado_Viaje: "Solicitado",
   });
 
   const onSubmit = (event) => {
     event.preventDefault();
-        //http://localhost:3300/api/stakeHolder/createViajeSH
+    const url = "http://localhost:3300/api/stakeHolder/createViajeSH";
     console.log(JSON.stringify(formValues));
+
+    const options = {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formValues),
+    };
+
+    fetch(url, options).then((response) => {
+      if (!response.ok) {
+        alert("Codigo de error desde el servidor");
+        response.json().then((json) => alert(json.message));
+      } else {
+        response.json().then((json) => alert(json.message));
+        navigate("/");
+      }
+    });
   };
 
   const handleChange = (event) => {
@@ -44,85 +63,86 @@ function ViajeStake() {
           <FormImput2
             label="Nombre Empresa"
             type="text"
-            name="nombreEmpresa"
+            name="Nombre_Empresa"
             onChange={handleChange}
           />
 
           <FormImput2
             label="Nombre Stake Holder"
             type="text"
-            name="nombreStake"
+            name="Nombre_StakeHolder"
             onChange={handleChange}
           />
 
           <FormImput2
             label="Nombre del Representante"
             type="text"
-            name="nombreRepre"
+            name="Nombre_Pasajero_Representante"
             onChange={handleChange}
           />
 
-          <FormImput
-            label="Fecha"
-            type="text"
-            name="date"
-            onChange={handleChange}
-          />
-
-          <FormImput
+          <FormImput2
             label="Contacto"
             type="text"
-            name="contacto"
+            name="Celular_Pasajero_Representante"
             onChange={handleChange}
           />
 
           <FormImput
             label="Direccion Origen"
             type="text"
-            name="direccionOrigen"
+            name="Direccion_Origen1"
             onChange={handleChange}
           />
 
           <FormImput
             label="Direccion Destino"
             type="text"
-            name="direccionDestino"
+            name="Direccion_Destino1"
             onChange={handleChange}
           />
 
           <FormImput
             label="Hora Inicio"
             type="text"
-            name="Hinicio"
+            name="Fecha_Hora_Inicio"
             onChange={handleChange}
           />
 
           <FormImput
             label="Hore Termino"
             type="text"
-            name="Htermino"
+            name="Fecha_Hora_Termino"
             onChange={handleChange}
           />
 
           <FormImput
             label="Numero de maletas"
             type="text"
-            name="n_maletas"
+            name="Numero_Maletas"
             onChange={handleChange}
           />
 
           <FormImput
             label="Numero de Pasajeros"
             type="text"
-            name="n_pasajeros"
+            name="Numero_Pasajeros"
             onChange={handleChange}
           />
 
           <div className="col-12">
-            <label for="tamaño" htmlFor="inputState" className="form-label">
+            <label
+              for="Tamaño_Equipaje"
+              htmlFor="inputState"
+              className="form-label"
+            >
               Tamaño de maletas
             </label>
-            <select id="tamaño" className="form-select" onChange={changeFunc}>
+            <select
+              id="Tamaño_Equipaje"
+              className="form-select"
+              onChange={changeFunc}
+            >
               <option value="Pequeña"> Pequeña </option>
               <option value="Mediana"> Mediana </option>
               <option value="Grande"> Grande </option>

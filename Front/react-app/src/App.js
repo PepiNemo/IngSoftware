@@ -11,6 +11,7 @@ import FormViaje from './compo/FormViaje'
 import CrearStake from './compo/CrearStake';
 import Edit2 from './compo/EditarCon';
 import ViajeStake from './compo/ViajeStake';
+import { CerrarSesion } from "./compo/cerrarSesion.js"
 
 function App () {
   return (
@@ -32,6 +33,7 @@ function App () {
             <Route path="/CrearStake"  element={<CrearStake/>}/>
             <Route path="/EditarCon"  element={<Edit2/>}/>
             <Route path="/ViajeStake"  element={<ViajeStake/>}/>
+            <Route path="/Logout"  element={<CerrarSesion/>}/>
 
 
 

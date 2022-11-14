@@ -31,8 +31,12 @@ const CrearConductor =() =>{
         fetch(url, options)
           .then(response => {
             if (!response.ok) {
-              alert("Codigo de error desde el servidor")
-              response.json().then(json => alert(json.message))
+                response.json().then(json => {
+                    (json.message[0]?.message)
+                    ? alert(json.message[0].message)
+                    : alert(json.message)
+                  
+                })
             } else {
               alert("Has registrado al conductor satisfactoriamente")
               navigate("/")

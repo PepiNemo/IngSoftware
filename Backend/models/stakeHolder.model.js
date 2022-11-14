@@ -6,7 +6,7 @@ const schema = new Schema({
         required: true
     },
     Rut_Empresa:{
-        type: Number, 
+        type: String, 
         required: true,
         unique: true
     },

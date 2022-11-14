@@ -29,6 +29,8 @@ const Admin =() =>{
                   <Link className="nav-link text-light" to='/ViajeStake'>Pedir Viaje StakeHolder</Link>
 
                   <Link className="nav-link text-light" to='/CrearStake'>Crear StakeHolder</Link>
+                  <Link className="nav-link text-light" to='/Logout'>Cerrar Sesion</Link>
+
 
                   
                   

@@ -34,7 +34,6 @@ const Sesionn = () => {
     fetch(url, options)
       .then(response => {
         if (!response.ok) {
-          alert("Codigo de error desde el servidor")
           response.json().then(json => alert(json.message))
         } else {
           alert("Has iniciado sesion")
