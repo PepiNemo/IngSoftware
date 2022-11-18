@@ -5,3 +5,7 @@ password: superadmin
 Stake holder 
 user: stakeholder
 password: stakeholder
+
+Conductor
+user: malconductor
+password: malconductor

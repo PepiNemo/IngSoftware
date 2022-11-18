@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import  { 
     createViaje,
+    readViajes,
     updateViaje,
     removeViaje, 
 } from "../controllers/viaje.controller.js"
@@ -9,7 +10,8 @@ import  {
 const router = Router();
 
 router.post("/createViaje", createViaje);
-router.patch("/actualizarViaje", updateViaje);
-router.delete("/removeViajeSH", removeViaje);
+router.post("/readViajes", readViajes)
+//router.patch("/actualizarViaje", updateViaje);
+router.delete("/removeViaje", removeViaje);
 
 export const pasajeroRouter = router;

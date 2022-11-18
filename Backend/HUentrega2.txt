@@ -3,6 +3,7 @@ Historias de usuario
 -------------Sesion y CRUD usuarios --------
 1.[X] Iniciar Sesion. 
 2.[X] Cerrar Sesion.
+
 #Desplegable "Opciones de administrador"
 , renderizado segun el estado del ROL == "Admin".
 3.[X] Admin agrega StakeHolder 
@@ -10,12 +11,13 @@ Historias de usuario
 
 #Boton a Vista "Conductores", tener una tabla con los Conductores
 , y en cada conductor tener un boton deshabilitar y eliminar.
-9.[FrontEnd] Admin eliminar conductor.
-6.[Frontend] Admin deshabilita conductor.
+6.[X] Admin deshabilita conductor.
+9.[X] Admin eliminar conductor.
+
 
 #Boton a vista, "Mi Perfil" o icono de monito.
-7.[] Todos actualizar perfil.
-10.[] SH cambiar contraseña  
+7. [X] Todos actualizar perfil.
+10.[X] SH cambiar contraseña. 
 
 
 ----------Funcionalidad pedir viaje ---------
@@ -23,5 +25,5 @@ Historias de usuario
 5.[X] Pasajero pide viaje 
 
 -------------- Obtener los viajes ----------
-11.[Backend] Admin obtiene los viajes de un SH.
-12.[Backend] Conductor ve sus viajes agendados.
+11.[X] Admin obtiene los viajes de un SH.
+12.[X] Conductor ve sus viajes agendados.

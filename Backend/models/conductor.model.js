@@ -5,6 +5,10 @@ const schema = new Schema({
         type: String,
         required: true,
     },
+    Rut: {
+        type: String,
+        required: true,
+    },
     Celular: {
         type: Number,
         required: true,

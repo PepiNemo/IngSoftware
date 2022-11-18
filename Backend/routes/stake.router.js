@@ -1,10 +1,9 @@
 import { Router } from "express";
 
-import { loginRequiredStake } from "../controllers/stake.controller.js"
+import { loginRequiredStake, readStakeHolder, updateStakeHolder } from "../controllers/stake.controller.js"
 
 import  { 
     createViajeSH,
-    readViajeSH,
     readViajesSH,
     updateViajeSH,
     removeViajeSH, 
@@ -12,8 +11,16 @@ import  {
 
 const router = Router();
 
+router.get("/readStakeHolder", loginRequiredStake, readStakeHolder);
+
 router.post("/createViajeSH", loginRequiredStake, createViajeSH);
-router.patch("/actualizarViaje", loginRequiredStake, updateViajeSH);
+router.post("/readViajesSH", loginRequiredStake, readViajesSH);
+router.post("/updateStakeHolder", loginRequiredStake, updateStakeHolder)
 router.delete("/removeViajeSH", loginRequiredStake, removeViajeSH);
+
+
+
+//router.patch("/actualizarViaje", loginRequiredStake, updateViajeSH);
+
 
 export const stakeRouter = router;
