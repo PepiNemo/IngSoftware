@@ -45,7 +45,35 @@ export const readViajesAdmin = async (req, res) => {
 
 
 export const updateViaje = async (req, res) => {
-    return res.status(201).json({ message: 'Has actualizado correctamente el viaje.'})
+    try{
+        //Condiciones para un cliente comun
+        if(Object.keys(req.body).length > 1 && req.body?.Id_Viaje && req?.session?.Rol != "admin"){
+            var updateViaje = await modelViaje.updateOne({_id: req.body.Id_Viaje }, { ...req.body })
+        }else if(!req.body?.Id_Viaje && req?.session?.Rol != "admin"){
+            return res.status(400).json({ message: "Debes indicar el identificador del viaje a actualizar." })
+        }else if(Object.keys(req.body).length == 1 && req.body?.Id_Viaje && req?.session?.Rol != "admin"){
+            return res.status(400).json({ message: "Debes indicar almenos un parametro a actualizar." })
+        }
+        
+        //Condiciones para el admin
+        if(Object.keys(req.body).length > 2 && req.body?.Id_Viaje && req.body?.Id_Value && req.session?.Rol == "admin"){
+            const {Id_Viaje, Id_Value} = req.body;
+            var updateViaje = await modelViaje.updateOne({[Id_Viaje]: Id_Value }, { ...req.body });
+        }else if( (!req.body?.Id_Viaje || !req.body?.Id_Value) && req.session?.Rol == "admin"){
+            return res.status(400).json({ message: "Debes indicar el identificador y su valor, del viaje  a actualizar." })
+        }else if(Object.keys(req.body).length == 2 && req.body?.Id_Viaje && req.body?.Id_Value && req.session?.Rol == "admin"){
+            return res.status(400).json({ message: "Debes indicar almenos un parametro a actualizar." })
+        }
+
+
+        if (updateViaje.matchedCount == 0) { return res.status(404).json({ message: "No se encuentra el viaje a actualizar." }); }
+        if(updateViaje.acknowledged == false){ return res.status(400).json({ message: "No se puede actualizar un parametro no existente ." }); }
+        (updateViaje.modifiedCount == 1)
+        ? res.status(200).json({message: "Se ha actualizado satisfactoriamente"})
+        : res.status(200).json({message: "El parametro ya tiene el valor a cambiar."})
+    }catch(e){
+        return res.status(400).json({ error: e})
+    }
 }
 
 export const removeViaje = async (req, res) => {

@@ -12,15 +12,13 @@ import  {
 const router = Router();
 
 router.get("/readStakeHolder", loginRequiredStake, readStakeHolder);
+router.patch("/updateStakeHolder", loginRequiredStake, updateStakeHolder)
+
 
 router.post("/createViajeSH", loginRequiredStake, createViajeSH);
 router.post("/readViajesSH", loginRequiredStake, readViajesSH);
-router.post("/updateStakeHolder", loginRequiredStake, updateStakeHolder)
+router.patch("/updateViajeSH", loginRequiredStake, updateViajeSH);
 router.delete("/removeViajeSH", loginRequiredStake, removeViajeSH);
-
-
-
-//router.patch("/actualizarViaje", loginRequiredStake, updateViajeSH);
 
 
 export const stakeRouter = router;

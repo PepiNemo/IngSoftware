@@ -50,7 +50,30 @@ export const readViajesSHAdmin =  async (req, res) => {
 }
 
 export const updateViajeSH = async (req, res) => {
-    return res.status(201).json({ message: 'you are update succefully travel.'})
+    try{
+        if(Object.keys(req.body).length > 2 && req.body?.Id_ViajeSH && req.body?.Id_Value ){
+            var {Id_ViajeSH, Id_Value} = req.body
+            if(req.session?.Rol == "stakeHolder"){
+                var updateViajeSH = await modelViajeSH.updateOne({Id_SH: req.session.userId, [Id_ViajeSH]: Id_Value }, { ...req.body })
+            }else{
+                var updateViajeSH = await modelViajeSH.updateOne({[Id_ViajeSH]: Id_Value }, { ...req.body })
+            }
+        }else if(!req.body?.Id_ViajeSH || !req.body?.Id_Value){
+            return res.status(400).json({ message: "Debes indicar el identificador y su valor del viaje a actualizar." })
+        }else{
+            return res.status(400).json({ message: "Debe indicar almenos un parametro a actualizar." });
+        }
+
+        if (updateViajeSH.matchedCount == 0) { return res.status(404).json({ message: "No se encuentra el viaje a actualizar." }); }
+        if(updateViajeSH.acknowledged == false){ return res.status(400).json({ message: "No se puede actualizar un parametro no existente ." }); }
+        
+        (updateViajeSH.modifiedCount == 1)
+        ? res.status(200).json({message: "Se ha actualizado satisfactoriamente"})
+        : res.status(200).json({message: "El parametro ya tiene el valor a cambiar."})
+
+    }catch(e){
+        return res.status(400).json({ error: e})
+    }
 }
 
 export const removeViajeSH = async (req, res) => {

@@ -23,11 +23,13 @@ import {
 
 import {
     createViajeSH,
+    updateViajeSH,
     readViajesSHAdmin
 } from "../controllers/viajeSH.controller.js"
 
 import {
     createViaje,
+    updateViaje,
     readViajesAdmin
 } from "../controllers/viaje.controller.js"
 
@@ -52,9 +54,11 @@ router.delete("/removeStakeHolder", loginRequiredAdmin, removeStakeHolder);
 router.post("/readViajesConductor", loginRequiredAdmin, readViajesConductor);
 
 router.post("/createViajeSH", loginRequiredAdmin, createViajeSH);
+router.patch("/updateViajeSH", loginRequiredAdmin, updateViajeSH);
 router.post("/readViajesSHAdmin", loginRequiredAdmin, readViajesSHAdmin);
 
 router.post("/createViaje", loginRequiredAdmin, createViaje);
+router.patch("/updateViaje", loginRequiredAdmin, updateViaje);
 router.post("/readViajesAdmin", loginRequiredAdmin, readViajesAdmin);
 
 
