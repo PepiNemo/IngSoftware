@@ -23,21 +23,21 @@ export const login = async (req, res) => {
             req.session.Rol="stakeHolder"
             req.session.userId = userStake.id;
             req.session.Nombre_Empresa = userStake.Nombre_Empresa
-            res.json({message: 'Has iniciado sesion correctamente como Stake Holder.'});
+            res.json({message: 'Has iniciado sesion correctamente como Stake Holder.', Rol: req.session.Rol});
         
         }else if(user.Rol == "conductor"){ 
             const isPasswordCorrect = await compare(req.body.Password, user.Password)
             if(!isPasswordCorrect){ return res.status(400).json({message: 'Error en la contraseña.'})}
             req.session.Rol="conductor";
             req.session.userId = user.id;
-            res.json({"message": 'Has iniciado sesion como conductor.'});
+            res.json({"message": 'Has iniciado sesion como conductor.', Rol: req.session.Rol});
         }
         else if(user.Rol == "admin"){
             const isPasswordCorrect = await compare(req.body.Password, user.Password)
             if(!isPasswordCorrect){ return res.status(400).json({message: 'Password does not exists.'})}
             req.session.Rol="admin";
             req.session.userId = user.id;
-            res.json({message: 'Has iniciado sesion como administrador.'});
+            res.json({message: 'Has iniciado sesion como administrador.', Rol: req.session.Rol});
         }
     }catch(e){
         return res.status(400).json({ error: e})

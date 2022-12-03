@@ -37,6 +37,7 @@ const Sesionn = () => {
           response.json().then(json => alert(json.message))
         } else {
           alert("Has iniciado sesion")
+          response.json().then(json => alert(`Rol: ${json.Rol}`))
           navigate("/")
         }
       })
