@@ -32,7 +32,7 @@ Historias de usuario
 
 13.[X] Administrador ve los viajes de los conductores. -> admin/readViajesConductor
 14.[X] Admins cambia el orden de prioridad de conductores. -> admin/updateConductor
-15.[] Admin define tarifas de viajes comunes ? crear documento tarifas viajes?. 
+15.[X] Admin define tarifas de viajes comunes ? crear documento tarifas viajes?. 
 
 --La mas dificil de hacer -----
 16.[] Recibir una oferta de servicio con su detalle.
