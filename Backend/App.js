@@ -3,6 +3,7 @@ import expressSession from 'express-session';
 import { authRouter } from "./routes/auth.router.js";
 import { adminRouter } from "./routes/admin.router.js";
 import { conductorRouter } from "./routes/conductor.router.js";
+import { tarifaRouter } from "./routes/tarifa.router.js"
 import { stakeRouter } from "./routes/stake.router.js"
 import { pasajeroRouter } from "./routes/pasajero.router.js"
 import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
@@ -35,6 +36,7 @@ app.use(expressSession({
 app.use('/api', authRouter)
 app.use('/api/admin', adminRouter)
 app.use('/api/conductor', conductorRouter)
+app.use('/api/tarifa', tarifaRouter)
 app.use('/api/stakeHolder', stakeRouter)
 app.use('/api/pasajero', pasajeroRouter)
 
