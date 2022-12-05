@@ -1,26 +1,74 @@
 import { EditAttributes } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormImput, FormImput2 } from "./formImput";
+import { json, useNavigate } from "react-router-dom";
+import { object } from "prop-types";
 
 function Edit2() {
+  const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
-    nombre: "",
-    rut: "",
-    contacto: "",
-    username: "",
-    password: "",
-    detalles: "",
+    Nombre: "",
+    Rut: "",
+    Celular: "",
+    Correo: "",
+    Username: "",
   });
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    console.log(JSON.stringify(formValues));
-  };
+  const [Password, setPassword]= useState()
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFromValues({ ...formValues, [name]: value });
   };
+
+
+  const handleChange2 = (event) => {
+    const { name, value } = event.target;
+    setPassword({ [name]: value });
+  };
+
+
+  const url = "http://localhost:3300/api/conductor/readConductor";
+
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+    };
+
+    fetch(url, options).then((response) => {
+      if (!response.ok) {
+        response.json().then((json) => console.log(json));
+      } else {
+        response.json().then((json) => {
+          console.log(json[0]);
+          setFromValues({ Nombre:json[0].Nombre, Rut: json[0].Rut, Celular:json[0].Celular, Correo:json[0].Correo, Username:json[0].Username });
+        });
+      }
+    });
+  }, []);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const url = "http://localhost:3300/api/conductor/updateConductor";
+    const union = Object.assign(formValues, Password)
+    console.log(JSON.stringify(union));
+    const options = {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(union),
+    };
+
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((json) => alert(json.message))
+      .then(navigate("/"));
+  };
+
   return (
     <div className="Vodka">
       <div className="container rounded bg-white mt-5 mb-5">
@@ -42,7 +90,7 @@ function Edit2() {
                   Cambiar contrasena
                 </button>
               </div>
-              
+
               <span> </span>
             </div>
           </div>
@@ -55,45 +103,47 @@ function Edit2() {
                 <FormImput2
                   label="Nombre Conductor"
                   type="text"
-                  name="nombre"
-                  placeholder="nombre"
+                  name="Nombre"
+                  placeholder=""
                   onChange={handleChange}
+                  value={formValues.Nombre}
                 />
               </div>
               <div className="row mt-3">
                 <FormImput2
                   label="Rut"
                   type="text"
-                  name="rut"
+                  name="Rut"
                   onChange={handleChange}
-                  placeholder="Ingrese Rut"
+                  placeholder=""
+                  value={formValues.Rut}
                 />
 
                 <FormImput2
                   label="Numero de contacto"
                   type="text"
-                  name="contacto"
+                  name="Celular"
                   onChange={handleChange}
-                  placeholder="Ingrese numero de contacto"
+                  placeholder=""
+                  value={formValues.Celular}
                 />
 
                 <FormImput2
                   label="Nombre de Usuario"
                   type="text"
-                  name="username"
+                  name="Username"
                   onChange={handleChange}
-                  placeholder="Nombre de usuario"
+                  placeholder=""
+                  value={formValues.Username}
                 />
                 <FormImput2
-                  label="Correo"
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  placeholder="Email"
+                  label="Contraseña"
+                  type="password"
+                  name="Password"
+                  onChange={handleChange2}
                 />
-
               </div>
-              
+
               <div className="mt-5 text-center">
                 <button
                   className="btn btn-primary profile-button"

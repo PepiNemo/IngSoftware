@@ -23,13 +23,18 @@ const Admin =() =>{
                 <div className="navbar-nav ms-auto">
                 
                   <Link className="nav-link active text-light bi bi-person-fill" aria-current="page" to='/Sesion'>Sesion</Link>
-                  <Link className="nav-link text-light" to='/Editar'>Editar Perfil StakeHolder</Link>
+                  <Link className="nav-link text-light" to='/Editar'>Editar Perfil StakeHolder</Link> 
                   <Link className="nav-link text-light" to='/CrearConductor'>Crear Conductor</Link>
                   <Link className="nav-link text-light" to='/EditarCon'>Editar Perfil Conductor</Link>
                   <Link className="nav-link text-light" to='/ViajeStake'>Pedir Viaje StakeHolder</Link>
 
                   <Link className="nav-link text-light" to='/CrearStake'>Crear StakeHolder</Link>
                   <Link className="nav-link text-light" to='/Logout'>Cerrar Sesion</Link>
+                  <Link className="nav-link text-light" to='/AgregarCondu'>Tablita jiji</Link>
+                  <Link className="nav-link text-light" to='/TablaAdminCon'>ObservarCon</Link>
+                  <Link className="nav-link text-light" to='/TablaAdminSH'>ObservarSH</Link>
+                  <Link className="nav-link text-light" to='/CondVeeViajes'>ObservarViajesCOn</Link>
+                  <Link className="nav-link text-light" to='/SHVeeViajes'>ObservarViajesSH</Link>
 
 
                   

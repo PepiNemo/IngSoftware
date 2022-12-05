@@ -11,7 +11,7 @@ import FormViaje from './compo/FormViaje'
 import CrearStake from './compo/CrearStake';
 import Edit2 from './compo/EditarCon';
 import ViajeStake from './compo/ViajeStake';
-import { CerrarSesion } from "./compo/cerrarSesion.js";
+import { CerrarSesion } from "./compo/cerrarSesion.js.js";
 
 import Observar from './compo/TablaAdminCon';
 import Observar2 from './compo/TablaAdminSH';

@@ -25,10 +25,10 @@ export const FormImput2 = (props) => {
       <input
         id={props.id}
         className="form-control"
-        type="text"
+        type={props.type}
         name={props.name}
-        placeholder={props.placeholder}
         onChange={props.onChange}
+        value={props.value}
       />
     </div>
   );
