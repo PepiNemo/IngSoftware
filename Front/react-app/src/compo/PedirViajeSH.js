@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FormImput, FormImput2 } from "./formImput";
 import { useNavigate } from "react-router-dom";
 
-function ViajeStake() {
+export default function PedirViajeSH() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
     Id_SH: "3",
@@ -10,7 +10,6 @@ function ViajeStake() {
     Direccion_Destino1: "",
     Fecha_Hora_Inicio: "",
     Fecha_Hora_Termino: "",
-    Nombre_Empresa: "",
     Nombre_StakeHolder: "",
     Nombre_Pasajero_Representante: "",
     Celular_Pasajero_Representante: "",
@@ -60,29 +59,23 @@ function ViajeStake() {
       <div className="container">
         <span className="title">Pedir Viaje</span>
         <from className="row g-3">
-          <FormImput2
-            label="Nombre Empresa"
-            type="text"
-            name="Nombre_Empresa"
-            onChange={handleChange}
-          />
 
           <FormImput2
-            label="Nombre Stake Holder"
+            label="Nombre del Stake Holder que solicita el viaje"
             type="text"
             name="Nombre_StakeHolder"
             onChange={handleChange}
           />
 
           <FormImput2
-            label="Nombre del Representante"
+            label="Nombre del pasajero representante"
             type="text"
             name="Nombre_Pasajero_Representante"
             onChange={handleChange}
           />
 
           <FormImput2
-            label="Contacto"
+            label="Numero de contacto del pasajero representante"
             type="text"
             name="Celular_Pasajero_Representante"
             onChange={handleChange}
@@ -103,28 +96,28 @@ function ViajeStake() {
           />
 
           <FormImput
-            label="Hora Inicio"
+            label="Hora de Inicio"
             type="text"
             name="Fecha_Hora_Inicio"
             onChange={handleChange}
           />
 
           <FormImput
-            label="Hore Termino"
+            label="Hora de Termino"
             type="text"
             name="Fecha_Hora_Termino"
             onChange={handleChange}
           />
 
           <FormImput
-            label="Numero de maletas"
+            label="Cantidad de maletas"
             type="text"
             name="Numero_Maletas"
             onChange={handleChange}
           />
 
           <FormImput
-            label="Numero de Pasajeros"
+            label="Cantidad de Pasajeros"
             type="text"
             name="Numero_Pasajeros"
             onChange={handleChange}
@@ -149,11 +142,12 @@ function ViajeStake() {
             </select>
           </div>
 
-          <input
+          <FormImput2
+            label="Detalles extras del viaje"
             type="text"
-            class="form-control"
-            placeholder="Campo de texto"
-          ></input>
+            name="Detalles_Extras"
+            onChange={handleChange}
+          />
 
           <div className="col-12">
             <button className="btn btn-primary" onClick={onSubmit}>
@@ -166,4 +160,4 @@ function ViajeStake() {
   );
 }
 
-export default ViajeStake;
+

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { json, useNavigate } from "react-router-dom";
 import { FormImput, FormImput2 } from "./formImput";
 
-function Edit() {
+export default function EditarPerfilSH() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
     Nombre_Empresa: "",
@@ -118,7 +118,7 @@ function Edit() {
                 />
 
                 <FormImput2
-                  label="Rut_Empresa"
+                  label="Rut de la Empresa"
                   type="text"
                   name="Rut_Empresa"
                   onChange={handleChange}
@@ -127,7 +127,7 @@ function Edit() {
                 />
 
                 <FormImput2
-                  label="Numero de Correo"
+                  label="Correo"
                   type="text"
                   name="Correo"
                   onChange={handleChange}
@@ -161,4 +161,3 @@ function Edit() {
     </div>
   );
 }
-export default Edit;

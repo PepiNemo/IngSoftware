@@ -1,51 +1,53 @@
-import React from 'react';
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
-
-const Sesionn = () => {
-  const navigate = useNavigate()
+export default function Sesion() {
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
-    "Username": '',
-    "Password": ''
-  })
+    Username: "",
+    Password: "",
+  });
+  
+  const [rol, setRol] = useState("hola");
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    setFormValues({ ...formValues, [name]: value })
-  }
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
 
-  const onSubmit = (event) => {
-    event.preventDefault()
+  const onSubmit = (event) =>{
+    event.preventDefault();
 
-    const url = "http://localhost:3300/api/login"
+    const url = "http://localhost:3300/api/login";
 
-    console.log(JSON.stringify(formValues))
+    console.log(JSON.stringify(formValues));
     const options = {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(formValues)
-    }
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formValues),
+    };
 
-    fetch(url, options)
-      .then(response => {
-        if (!response.ok) {
-          response.json().then(json => alert(json.message))
-        } else {
-          alert("Has iniciado sesion")
-          response.json().then(json => alert(`Rol: ${json.Rol}`))
-          navigate("/")
-        }
-      })
-  }
+    fetch(url, options).then((response) => {
+      if (!response.ok) {
+        response.json().then((json) => alert(json.message));
+      } else {
+        response.json().then((json) => {
+          setRol(json.Rol)
+          alert(json.message);
+          setRol((state) => {console.log(state);navigate("/");return state})   
+        })
+
+      }
+    });
+  };
 
   return (
-    <div className='Sessionn'>
-
+    <div className="Sessionn">
       <>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -62,12 +64,13 @@ const Sesionn = () => {
               <span className="title">Ingreso</span>
               <form onSubmit={onSubmit}>
                 <div className="input-field">
-                  <input 
-                  type="text" 
-                  placeholder="Ingresa tu email" 
-                  required="" 
-                  name="Username" 
-                  onChange={handleChange} />
+                  <input
+                    type="text"
+                    placeholder="Ingresa tu email"
+                    required=""
+                    name="Username"
+                    onChange={handleChange}
+                  />
                   <i className="uil uil-envelope icon" />
                 </div>
                 <div className="input-field">
@@ -93,6 +96,7 @@ const Sesionn = () => {
                   <button type="submit">Enviar</button>
                 </div>
               </form>
+              <h1></h1>
             </div>
           </div>
         </div>
@@ -126,15 +130,16 @@ const Sesionn = () => {
                   transporte privado y particular.
                 </p>
 
-                <p>
-                  Contactanos al +56990201831
-                </p>
+                <p>Contactanos al +56990201831</p>
               </div>
               <div className="box">
                 <h2>SIGUENOS</h2>
                 <div className="red-social">
                   <a href="#" className="fa fa-facebook" />
-                  <a href="https://www.instagram.com/_nxred._/" className="fa fa-instagram" />
+                  <a
+                    href="https://www.instagram.com/_nxred._/"
+                    className="fa fa-instagram"
+                  />
                   <a href="#" className="fa fa-twitter" />
                   <a href="#" className="fa fa-youtube" />
                 </div>
@@ -148,14 +153,7 @@ const Sesionn = () => {
           </footer>
         </div>
       </div>
-
-
-
-
-
     </div>
-
   );
-}
+};
 
-export default Sesionn;

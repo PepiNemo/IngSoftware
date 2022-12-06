@@ -3,17 +3,14 @@ import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
 
-//const url = "http://jsonplaceholder.typicode.com/users"
 
-const Observar3 = () =>{
-    //const navigate = useNavigate()
-    const [viajesConductor, setViajes] = useState()
-    const [estadoViaje, setEstadoViaje] = useState()
+export default function SHMisViajes () {
+    const [viajesSH, setViajesSH] = useState()
 
 
     const handleChange = (event) => {
         console.log(event.target.value)
-        setEstadoViaje(event.target.value);
+        setViajesSH(event.target.value);
       };
 
     const onSubmit = (event) => {
@@ -22,10 +19,10 @@ const Observar3 = () =>{
     };
 
     useEffect(()=>{
-        const url = "http://localhost:3300/api/conductor/readViajesConductor"
+        const url = "http://localhost:3300/api/stakeHolder/readViajesSH"
 
         const options = {
-            method: 'GET',
+            method: 'POST',
             credentials: 'include',
             headers: { 'Content-type': 'application/json' }
           }
@@ -39,25 +36,13 @@ const Observar3 = () =>{
 
 
 
-    const mostrarData = (data=viajesConductor, filter=estadoViaje) =>{
-        console.log("Viajes SH: ",data["Viajes SH"])
-        console.log("Viajes Comunes",data["Viajes comunes"])
-         if(filter!=null){
-            data = data.filter(stake => stake.estadoViaje == filter)
-        }
+    const mostrarData = (data) =>{
         
         let tbody =''
-        let data2=data
-        data=data2["Viajes SH"]
         for(let i=0;i<data.length;i++){
             tbody+=`<tr><td>Viaje SH</td><td>${data[i].Estado_Viaje}</td><td>${data[i].Nombre_Empresa}</td><td>${data[i].Nombre_StakeHolder}</td></tr>`
 
         }
-        data=data2["Viajes comunes"]
-        for(let i=0;i<data.length;i++){
-            tbody+=`<tr><td>Viajes Comunes</td><td>${data[i].Estado_Viaje}</td><td>${data[i].Nombre_Empresa}</td><td>${data[i].Nombre_StakeHolder}</td></tr>`
-
-        }  
         document.getElementById('data').innerHTML = tbody 
     }
     return(
@@ -91,9 +76,7 @@ const Observar3 = () =>{
         
 
     )
-    
+
     
         
 }
-
-export default Observar3

@@ -85,14 +85,14 @@ function FormViaje() {
             />
 
           <FormImput
-            label="Direccionn de Origen"
+            label="Direccion de Origen"
             type="text"
             name="Dire_Inicio"
             onChange={handleChange}
           />
 
           <FormImput
-            label="Direcion destino"
+            label="Direccion de Destino"
             type="text"
             name="Dire_Destino"
             onChange={handleChange}
@@ -106,14 +106,14 @@ function FormViaje() {
           />
 
           <FormImput
-            label="Fecha"
+            label="Fecha del Viaje"
             type="text"
             name="Fecha"
             onChange={handleChange}
           />
 
           <FormImput
-            label="Hora inicio"
+            label="Hora de inicio"
             type="text"
             name="Hora_Inicio"
             onChange={handleChange}
@@ -128,11 +128,11 @@ function FormViaje() {
 
           <div className="col-md-6">
             <label
-              for="Numero_Pasajeros"
+              for="Numero de Pasajeros"
               htmlFor="inputState"
               className="form-label"
             >
-              Pasajero/s
+              Numero de Pasajeros
             </label>
             <select
               id="Numero_Pasajeros"
@@ -149,7 +149,7 @@ function FormViaje() {
 
           <div className="col-md-6">
             <label for="Tamaño_Maletas" htmlFor="inputState" className="form-label">
-              Tamaño_Maletas de Maletas
+              Tamaño de las Maletas
             </label>
             <select id="Tamaño_Maletas" className="form-select" defaultValue={"Mediana"} onChange={changeFunc}>
               <option value="Pequeña"> Pequeña </option>

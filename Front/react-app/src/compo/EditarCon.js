@@ -4,7 +4,7 @@ import { FormImput, FormImput2 } from "./formImput";
 import { json, useNavigate } from "react-router-dom";
 import { object } from "prop-types";
 
-function Edit2() {
+export default function EditarPerfilConductor() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
     Nombre: "",
@@ -160,4 +160,3 @@ function Edit2() {
     </div>
   );
 }
-export default Edit2;
