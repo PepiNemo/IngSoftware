@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 import Prin from './Principal'
 
+import { unSuscription } from "../Suscription/main.js"
+
 export const CerrarSesion = () => {
     const navigate = useNavigate()
     useEffect(() => {
@@ -20,7 +22,7 @@ export const CerrarSesion = () => {
                     response.json().then(json => alert(json.message))
                     navigate("/")
                 } else {
-                    response.json().then(json => alert(json.message))
+                    response.json().then(async(json) => {await unSuscription();alert(json.message)})
                     navigate("/")
                 }
             })

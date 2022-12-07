@@ -17,7 +17,9 @@ import AdminViajesSH from './compo/TablaAdminViajesSH';
 import ConductorMisViajes from './compo/TablaConductorMisViajes';
 import SHMisViajes from './compo/TablaMisViajesSH';
 import { ConductorMisViajesSolicitados } from "./compo/ConductorViajesSolicitados"
-
+import BorrarStake from "./compo/BorrarStake"
+import AgregarTarifa from './compo/AgregarTarifa';
+import Readtari from './compo/Readtari';
 
 function App () {
   return (
@@ -41,11 +43,16 @@ function App () {
             <Route path="/EditarPerfilSH"  element={<EditarPerfilSH/>}/>
             <Route path="/TablaMisViajesSH"  element={<SHMisViajes/>}/>
 
+            <Route path="/Readtari" element={<Readtari />} /> 
+            
+            <Route path="/AgregarTarifa" element={<AgregarTarifa />} />
 
             <Route path="/EditarPerfilConductor"  element={<EditarPerfilConductor/>}/>
             <Route path="/TablaMisViajesConductor"  element={<ConductorMisViajes/>}/>
             <Route path="/MisViajesSolicitadosConductor"  element={<ConductorMisViajesSolicitados/>}/>
-            
+              
+            <Route path="/EliminarStake" element={<BorrarStake />} />
+
             <Route path="/CrearConductor"  element={<CrearConductor/>}/>
             <Route path="/CrearStake"  element={<CrearStake/>}/>
             <Route path="/TablaAdminCon"  element={<VerConductores/>}/>

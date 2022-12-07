@@ -26,11 +26,20 @@ const Admin =() =>{
                   <Link className="nav-link text-light" to='/PedirViajeSH'>SH-Pedir Viaje</Link>
                   <Link className="nav-link text-light" to='/EditarPerfilSH'>SH-Editar Perfil</Link> 
                   <Link className="nav-link text-light" to='/TablaMisViajesSH'>SH-Mis Viajes</Link>
+                  
+ 
+                  <Link className="nav-link text-light" to="/AgregarTarifa">
+                  Agregar Tarifa
+                  </Link>
+
+                  <Link className="nav-link text-light" to="/Readtari">
+                   VT
+                  </Link>
 
                   <Link className="nav-link text-light" to='/EditarPerfilConductor'>CA-Editar Perfil </Link>
                   <Link className="nav-link text-light" to='/TablaMisViajesConductor'>CA-MisViajes</Link>
                   <Link className="nav-link text-light" to='/MisViajesSolicitadosConductor'>CA-MisViajesSolicitados</Link>
-
+                  <Link className="nav-link text-light" to="/EliminarStake">A-Eliminar Stake</Link>
                   <Link className="nav-link text-light" to='/CrearConductor'>A-Crear Conductor</Link>
                   <Link className="nav-link text-light" to='/CrearStake'>A-Crear StakeHolder</Link>
                   <Link className="nav-link text-light" to='/TablaAdminCon'>A-VerConductores</Link>

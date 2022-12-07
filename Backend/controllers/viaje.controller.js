@@ -133,24 +133,23 @@ export const updateViaje = async (req, res) => {
 
 export const removeViaje = async (req, res) => {
     try{
-
         if(Object.keys(req.body).length > 0 && req.session?.Rol == "admin" ){
-            var remove = await modelViaje.deleteOne({...body });
+            var remove = await modelViaje.deleteOne({...req.body });
         }else if(req.session?.Rol == "admin"){
-            res.status(400).json({message: "Debe indicar algun parametro del viaje para eliminar."})
+            return res.status(400).json({message: "Debe indicar algun parametro del viaje para eliminar."})
         }else if(req.body?.Id_Viaje){
             var remove = await modelViaje.deleteOne({_id: req.body.Id_Viaje})
         }else{
-            res.status(400).json({message: "Debes indicar el identificador del viaje a eliminar."})
+            return res.status(400).json({message: "Debes indicar el identificador del viaje a eliminar."})
         }
 
-        (remove.deletedCount == 1)
+        (remove?.deletedCount == 1)
         ? res.status(204).json({message: "Eliminado correctamente"})
         : res.status(404).json({message: "No se ha encontrado el viaje"})
         
 
     }catch(e){
-        return res.status(400).json({ error: e})
+        return res.status(400).json({e: "Algo fallo"})
     }
 
 }

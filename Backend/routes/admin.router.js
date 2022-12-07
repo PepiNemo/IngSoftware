@@ -24,7 +24,8 @@ import {
 import {
     createViajeSH,
     updateViajeSH,
-    readViajesSHAdmin
+    readViajesSHAdmin,
+    removeViajeSH
 } from "../controllers/viajeSH.controller.js"
 
 import {
@@ -56,6 +57,8 @@ router.post("/readViajesConductor", loginRequiredAdmin, readViajesConductor);
 router.post("/createViajeSH", loginRequiredAdmin, createViajeSH);
 router.patch("/updateViajeSH", loginRequiredAdmin, updateViajeSH);
 router.post("/readViajesSHAdmin", loginRequiredAdmin, readViajesSHAdmin);
+router.delete("/removeViajeSH", loginRequiredAdmin, removeViajeSH);
+
 
 router.post("/createViaje", loginRequiredAdmin, createViaje);
 router.patch("/updateViaje", loginRequiredAdmin, updateViaje);

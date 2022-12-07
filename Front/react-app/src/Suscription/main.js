@@ -3,6 +3,7 @@ export async function Suscription() {
   const PUBLIC_VAPID_KEY = "BL6Teogk8mbNxIVTq6eViZXexzh775hApDcpnDic3JQKkA5zb4zjrgsdSfqc0xkQQgOswDI0w9IEmljya1Z0wwU"
   
   //Service worker
+
   navigator.serviceWorker.register('/worker.js')
   console.log("New server worker")
   await navigator.serviceWorker.ready.then(
@@ -10,6 +11,7 @@ export async function Suscription() {
       const options = {
         userVisibleOnly: true,
         applicationServerKey: PUBLIC_VAPID_KEY,
+      
       };
       serviceWorkerRegistration.pushManager.subscribe(options).then(
         async (pushSubscription) => {
@@ -38,4 +40,12 @@ export async function Suscription() {
       );
     });
 
+}
+
+
+export async function unSuscription(){
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for(let registration of registrations) {
+     registration.unregister()
+   } })
 }

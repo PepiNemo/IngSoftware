@@ -32,8 +32,7 @@ export function ConductorMisViajesSolicitados() {
 
 
     const mostrarData = (data = viajesConductor, filter = estadoViaje) => {
-        /*        console.log("Viajes SH: ",data["Viajes SH"])
-               console.log("Viajes Comunes",data["Viajes comunes"]) */
+
         if (filter != "") {
             data = data.filter(stake => stake.estadoViaje == filter)
         }
@@ -41,6 +40,7 @@ export function ConductorMisViajesSolicitados() {
         let tbody = ''
         let viajesSH = data["Viajes SH"]
         if (viajesSH != undefined) {
+            console.log("Viajes SH: ", viajesSH)
             let thead = `<tr>
                         <th>Nombre Empresa</th>
                         <th>Nombre SH</th>
@@ -54,7 +54,7 @@ export function ConductorMisViajesSolicitados() {
                     </tr>`
             document.getElementById('Encabezado').innerHTML = thead
 
-            for (let i = 0; i < viajesComunes.length; i++) {
+            for (let i = 0; i < viajesSH.length; i++) {
                 tbody += `<tr>
                 <td>${viajesSH[i].Nombre_Empresa}</td>
                 <td>${viajesSH[i].Nombre_StakeHolder}</td>
@@ -74,6 +74,7 @@ export function ConductorMisViajesSolicitados() {
         let tbody2 = ''
         let viajesComunes = data["Viajes comunes"]
         if (viajesComunes != undefined) {
+            console.log("Viajes Comunes", viajesComunes)
             let thead = `<tr>
                             <th>Nombre Pasajero</th>
                             <th>Direccion de Origen</th>
@@ -105,13 +106,8 @@ export function ConductorMisViajesSolicitados() {
         }
 
 
-        console.log("Viajes SH: ", viajesSH)
-        console.log("Viajes Comunes", viajesComunes)
-
-
 
         document.getElementById('data').innerHTML = tbody
-        
         document.getElementById('data2').innerHTML = tbody2
     }
     return (
@@ -149,15 +145,7 @@ export function ConductorMisViajesSolicitados() {
 
             </div>
 
-
-
-
-
-
-
         </div>
-
-
     )
 
 

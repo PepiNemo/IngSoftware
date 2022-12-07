@@ -5,10 +5,6 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    Prioridad: {
-        type: Number,
-        required: true
-    },
     pushSubscription: {
         type: String, 
         required: true,
