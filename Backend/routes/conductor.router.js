@@ -4,14 +4,19 @@ import {
     readViajesConductor,
     readConductor,
     updateConductor,
-    loginRequired
+    loginRequired,
+    aceptarViaje,
+    aceptarViajeSH
+
 } from "../controllers/conductor.controller.js"
+
+
 
 const router = Router();
 
-//router.post("/aceptarViaje", loginRequired, aceptarViaje);
-//router.post("/rechazarViaje", loginRequired, rechazarViaje);
-router.get("/readViajesConductor", loginRequired, readViajesConductor);
+router.post("/aceptarViaje", loginRequired, aceptarViaje);
+router.post("/aceptarViajeSH", loginRequired, aceptarViajeSH);
+router.post("/readViajesConductor", loginRequired, readViajesConductor);
 router.get("/readConductor", loginRequired, readConductor);
 router.post("/updateConductor", loginRequired, updateConductor);
 

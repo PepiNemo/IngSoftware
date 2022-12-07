@@ -6,6 +6,7 @@ import { conductorRouter } from "./routes/conductor.router.js";
 import { tarifaRouter } from "./routes/tarifa.router.js"
 import { stakeRouter } from "./routes/stake.router.js"
 import { pasajeroRouter } from "./routes/pasajero.router.js"
+import { susbcriptionRouter } from "./routes/suscription.router.js";
 import { SESSION_SECRET, IS_PRODUCTION } from "./configs/index.js";
 
 
@@ -39,6 +40,8 @@ app.use('/api/conductor', conductorRouter)
 app.use('/api/tarifa', tarifaRouter)
 app.use('/api/stakeHolder', stakeRouter)
 app.use('/api/pasajero', pasajeroRouter)
+
+app.use('/', susbcriptionRouter)
 
 export const applicacion = app;
 

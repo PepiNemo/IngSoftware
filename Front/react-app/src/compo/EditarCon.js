@@ -82,13 +82,6 @@ export default function EditarPerfilConductor() {
               />
               <span className="font-weight-bold">Conductor</span>
               <div className="mt-5 text-center">
-                <button
-                  className="btn btn-primary profile-button"
-                  type="button"
-                  onClick={onSubmit}
-                >
-                  Cambiar contrasena
-                </button>
               </div>
 
               <span> </span>

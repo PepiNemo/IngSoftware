@@ -11,23 +11,14 @@ export default function ConductorMisViajes(){
     const [estadoViaje, setEstadoViaje] = useState()
 
 
-    const handleChange = (event) => {
-        console.log(event.target.value)
-        setEstadoViaje(event.target.value);
-      };
-
-    const onSubmit = (event) => {
-        event.preventDefault();
-        mostrarData()
-    };
-
     useEffect(()=>{
         const url = "http://localhost:3300/api/conductor/readViajesConductor"
 
         const options = {
-            method: 'GET',
+            method: 'POST',
             credentials: 'include',
-            headers: { 'Content-type': 'application/json' }
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({Estado_Viaje: "Aceptado"})
           }
     
         fetch(url,options)

@@ -32,10 +32,16 @@ const CrearConductor =() =>{
           .then(response => {
             if (!response.ok) {
                 response.json().then(json => {
-                    (json.message[0]?.message)
-                    ? alert(json.message[0].message)
-                    : alert(json.message)
-                  
+                    if(json?.message){
+                        (json.message[0]?.message)
+                        ? alert(json.message[0].message)
+                        : alert(json.message)
+                        console.log(json)
+                    }else{
+                        const res = JSON.stringify(json.error.keyValue)
+                        alert(`Problemas con la llave: ${res}`)
+                    }
+
                 })
             } else {
               alert("Has registrado al conductor satisfactoriamente")

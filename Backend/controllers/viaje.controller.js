@@ -1,11 +1,66 @@
 import { modelViaje } from "../models/viaje.model.js";
-import omit from "lodash";
-import { dbSecretFields } from "../configs/index.js";
+import { modelConductor } from "../models/conductor.model.js"
+
+import { conductorPrioritario } from "./conductor.controller.js"
+import { SendNotification } from "./subscription.controller.js"
+
+
+// Returns a Promise that resolves after "ms" Milliseconds
+const timer = ms => new Promise(res => setTimeout(res, ms))
+
 
 export const createViaje = async (req, res) => {
     try{
-        await modelViaje.create({...req.body})
-        return res.status(201).json({message: 'Viaje pedido.'})
+        //Loop de ofrecimiento
+        modelConductor.countDocuments().then(async(count_documents) => {
+            const {idConductorPrioritario, menorPrioridad} =  await conductorPrioritario();
+            const viaje = await modelViaje.create({...req.body, Id_Conductor:idConductorPrioritario})
+            await SendNotification(menorPrioridad);
+            let lastMenorPrioridad = menorPrioridad
+            await timer(60000);
+
+            async function load () { // We need to wrap the loop into an async function for this to work
+                for (var i = 1; i < count_documents; i++) {
+                    console.log("Conductor a notificar : ", i)
+                    const {idConductorPrioritario, menorPrioridad} =  await conductorPrioritario(lastMenorPrioridad);
+                    const actualViaje = await modelViaje.findById(viaje._id)
+                    
+                    if(actualViaje.Estado_Viaje  == "Aceptado"){
+                        console.log("El viaje ya fue aceptado")
+                        i=count_documents;
+                    }
+                    else if(idConductorPrioritario != null){
+                        await SendNotification(menorPrioridad);
+                        lastMenorPrioridad = menorPrioridad
+                        if(i < count_documents - 1){
+                            await modelViaje.updateOne({_id: viaje._id}, {Id_Conductor:idConductorPrioritario})
+                        }else{
+                            await modelViaje.deleteOne({_id: viaje._id})
+                            console.log("Viaje Eliminado")
+                        }
+                        await timer(60000);
+                        
+                    }else{
+                        await modelViaje.deleteOne({_id: viaje._id})
+                        console.log("Viaje Eliminado")
+                        i=count_documents;
+                    }
+                    
+
+                }
+            }
+            load ()
+            
+
+        }).catch((err) => {
+            return res.status(400).json(err.Message)
+        })  
+
+
+        return res.status(201).json({message: 'Viaje solicitado.'})
+
+
+        
     }catch(e){
         return res.status(400).json({ error: e})
     }

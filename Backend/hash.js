@@ -1,4 +1,4 @@
 import { hash } from "bcrypt";
 
-hash("superadmin", 12)
+hash("malisimoconductor", 12)
     .then(p => console.log(p))

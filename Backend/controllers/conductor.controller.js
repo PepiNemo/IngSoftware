@@ -4,17 +4,28 @@ import { hash } from "bcrypt";
 
 import { modelViaje } from "../models/viaje.model.js"
 import { modelViajeSH } from "../models/viajeSH.model.js"
-import { updateViaje } from "./viaje.controller.js";
 
 
 
-/* export const aceptarViaje = async (req, res) => {
-    return res.status(201).json({ message: 'you are accept succefully travel.'})
+
+export const aceptarViaje = async (req, res) => {
+    try{
+        modelViaje.updateOne({ Id_Conductor: req.session.userId, Estado_Viaje: "Solicitado"  }, { Estado_Viaje: "Aceptado" })
+        return res.status(201).json({ message: 'Has aceptado el viaje corrrectamente.'})
+    }catch(e){
+        res.status(400).json({error: e})
+    }
 }
 
-export const rechazarViaje = async (req, res) => {
-    return res.status(201).json({ message: 'you are decline succefully travel.'})
-} */
+export const aceptarViajeSH = async (req, res) => {
+    try{
+        modelViajeSH.updateOne({ Id_Conductor: req.session.userId, Estado_Viaje: "Solicitado"  }, { Estado_Viaje: "Aceptado" })
+        return res.status(201).json({ message: 'Has aceptado el viaje corrrectamente.'})
+    }catch(e){
+        res.status(400).json({error: e})
+    }
+}
+
 
 export const createConductor = async (req, res) => {
     try {
@@ -34,8 +45,8 @@ export const createConductor = async (req, res) => {
 export const readViajesConductor = async (req, res) => {
     try {
         const Id_Conductor = req.body?.Id_Conductor || req.session.userId
-        const Viaje = await modelViaje.find({ Id_Conductor: Id_Conductor });
-        const viajeSH = await modelViajeSH.find({ Id_Conductor: Id_Conductor });
+        const Viaje = await modelViaje.find({...req.body,  Id_Conductor: Id_Conductor });
+        const viajeSH = await modelViajeSH.find({...req.body, Id_Conductor: Id_Conductor });
 
         if (Viaje.length > 0 && viajeSH.length > 0) {
             res.status(200).json({"Viajes SH": viajeSH, "Viajes comunes": Viaje})
@@ -60,8 +71,8 @@ export const readConductors = async (req, res) => {
     } catch (e) {
         return res.status(400).json({ error: e })
     }
-
 }
+
 
 export const readConductor = async (req, res) => {
     try {
@@ -146,7 +157,7 @@ export const removeConductor = async (req, res) => {
 }
 
 export const loginRequired = async (req, res, next) => {
-    if (!req.session || !req.session.userId || req.session.Rol != "conductor") {
+    if (!req.session || !req.session.userId || req.session.Rol == "stakeholder") {
         return res.status(403).json({ message: "Debes iniciar sesion como conductor para acceder a esta ruta." });
     }
 
@@ -154,4 +165,22 @@ export const loginRequired = async (req, res, next) => {
     if (!req.user) { return res.status(403).json({ message: "El usuario ya no es parte del sistema." }); }
     next();
 };
+
+
+export async function conductorPrioritario (ultimaPriodidad=-1) {
+    const conductors = await modelConductor.find().all()
+    let idConductorPrioritario;
+    let menorPrioridad =  999;
+    for (let conductor of conductors){
+        if(conductor.Prioridad < menorPrioridad && conductor.Prioridad > ultimaPriodidad ){
+            menorPrioridad = conductor.Prioridad;
+            idConductorPrioritario = conductor._id
+        }
+    }
+    if(menorPrioridad == ultimaPriodidad){
+        return null
+    }else{
+        return {idConductorPrioritario, menorPrioridad}
+    }
+}
 

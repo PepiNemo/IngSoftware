@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { Suscription} from "../Suscription/main.js"
 
 
 export default function Sesion() {
@@ -19,7 +21,7 @@ export default function Sesion() {
   };
 
 
-  const onSubmit = (event) =>{
+  const onSubmit = async (event) =>{
     event.preventDefault();
 
     const url = "http://localhost:3300/api/login";
@@ -32,13 +34,16 @@ export default function Sesion() {
       body: JSON.stringify(formValues),
     };
 
-    fetch(url, options).then((response) => {
+    await fetch(url, options).then( (response) => {
       if (!response.ok) {
         response.json().then((json) => alert(json.message));
       } else {
-        response.json().then((json) => {
+        response.json().then(async (json) => {
           setRol(json.Rol)
           alert(json.message);
+          if(json.Rol == "conductor" || json.Rol=="admin"){
+            await Suscription()
+          }
           setRol((state) => {console.log(state);navigate("/");return state})   
         })
 

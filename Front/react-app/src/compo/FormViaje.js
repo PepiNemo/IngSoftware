@@ -37,11 +37,23 @@ function FormViaje() {
       .then(response => {
         if (!response.ok) {
           alert("Codigo de error desde el servidor")
-          response.json().then(json => alert(json.message))
-        } else {
-          response.json().then(json => alert(json.message))
+          response.json().then(json => {
+            if(json?.message){
+              alert(json.message)
+            }
+
+            alert(json.error.message)
+          })
+        }
+        else {
+
+          response.json().then(json => alert(json.message));
           navigate("/")
         }
+    })
+    .catch(e => {
+      alert("Error")
+      console.log(e)
     })
   };
   

@@ -28,7 +28,8 @@ const schema = new Schema({
     },
     Prioridad:{
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     Imagen_URL: {
         type: String,

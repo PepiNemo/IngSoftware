@@ -29,6 +29,7 @@ const Admin =() =>{
 
                   <Link className="nav-link text-light" to='/EditarPerfilConductor'>CA-Editar Perfil </Link>
                   <Link className="nav-link text-light" to='/TablaMisViajesConductor'>CA-MisViajes</Link>
+                  <Link className="nav-link text-light" to='/MisViajesSolicitadosConductor'>CA-MisViajesSolicitados</Link>
 
                   <Link className="nav-link text-light" to='/CrearConductor'>A-Crear Conductor</Link>
                   <Link className="nav-link text-light" to='/CrearStake'>A-Crear StakeHolder</Link>

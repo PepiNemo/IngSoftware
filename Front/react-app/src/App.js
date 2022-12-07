@@ -16,8 +16,9 @@ import VerConductores from './compo/TablaAdminCon';
 import AdminViajesSH from './compo/TablaAdminViajesSH';
 import ConductorMisViajes from './compo/TablaConductorMisViajes';
 import SHMisViajes from './compo/TablaMisViajesSH';
-// import 
-import EditTabla from './compo/EditBlog';
+import { ConductorMisViajesSolicitados } from "./compo/ConductorViajesSolicitados"
+
+
 function App () {
   return (
     
@@ -29,8 +30,10 @@ function App () {
         
         
           <Routes>
-          <Route path="/"  element={<Prin/>}/>
-             <Route path="/Principal"  element={<Prin/>}/>
+
+            <Route path="/"  element={<Prin/>}/>
+
+            <Route path="/Principal"  element={<Prin/>}/>
             <Route path="/FormViaje"  element={<FormViaje/>}/>
             <Route path="/Sesion"  element={<Sesionn/>}/>
 
@@ -41,7 +44,8 @@ function App () {
 
             <Route path="/EditarPerfilConductor"  element={<EditarPerfilConductor/>}/>
             <Route path="/TablaMisViajesConductor"  element={<ConductorMisViajes/>}/>
-
+            <Route path="/MisViajesSolicitadosConductor"  element={<ConductorMisViajesSolicitados/>}/>
+            
             <Route path="/CrearConductor"  element={<CrearConductor/>}/>
             <Route path="/CrearStake"  element={<CrearStake/>}/>
             <Route path="/TablaAdminCon"  element={<VerConductores/>}/>

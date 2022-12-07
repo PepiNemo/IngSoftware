@@ -58,7 +58,7 @@ const schema = new Schema({
         required: true,
     },
     Detalles_Extras:{
-        type: Number,
+        type: String,
         required: false,
     }
 })
