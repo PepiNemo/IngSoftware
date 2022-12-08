@@ -32,9 +32,11 @@ const Admin =() =>{
                   Agregar Tarifa
                   </Link>
 
-                  <Link className="nav-link text-light" to="/Readtari">
-                   VT
+                  <Link className="nav-link text-light" to="/UpdateViajeSH">
+                   UpVSH
                   </Link>
+
+                  
 
                   <Link className="nav-link text-light" to='/EditarPerfilConductor'>CA-Editar Perfil </Link>
                   <Link className="nav-link text-light" to='/TablaMisViajesConductor'>CA-MisViajes</Link>
@@ -45,6 +47,7 @@ const Admin =() =>{
                   <Link className="nav-link text-light" to='/TablaAdminCon'>A-VerConductores</Link>
                   <Link className="nav-link text-light" to='/TablaAdminViajesSH'>A-ViajesDeSH</Link>
                   <Link className="nav-link text-light" to='/Logout'>Cerrar Sesion</Link>
+                  {/* <Link className="nav-link text-light" to='/Verviajes'>A-VerViajes</Link> */}
 
                   
                   

@@ -30,13 +30,13 @@ Historias de usuario
 
 ############## Tercera Entrega ##################
 
-13.[X] Administrador ve los viajes de los conductores. -> admin/readViajesConductor
-14.[X] Admins cambia el orden de prioridad de conductores. -> admin/updateConductor
-15.[X] Admin define tarifas de viajes comunes ? crear documento tarifas viajes?. 
+13.[] Administrador ve los viajes de los conductores.
+14.[X] Admins cambia el orden de prioridad de conductores. 
+15.[x] Admin define tarifas de viajes comunes 
 
 --La mas dificil de hacer -----
-16.[] Recibir una oferta de servicio con su detalle.
+16.[x] Recibir una oferta de servicio con su detalle.
 
 
-17.[X]. Stake Holder desea ver cuantos viajes a pedido  -> stakeHolder/readViajesSH
-18.[X]. Stake Holder y cliente comun cambia el horario de viaje. -> stakeHolder/updateViajeSH ; pasajero/updateViaje
+17.[X]. Stake Holder desea ver cuantos viajes a pedido  
+18.[X]. Stake Holder y cliente comun cambia el horario de viaje. 

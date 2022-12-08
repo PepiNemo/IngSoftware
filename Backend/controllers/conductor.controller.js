@@ -44,16 +44,24 @@ export const createConductor = async (req, res) => {
 
 export const readViajesConductor = async (req, res) => {
     try {
-        const Id_Conductor = req.body?.Id_Conductor || req.session.userId
-        const Viaje = await modelViaje.find({...req.body,  Id_Conductor: Id_Conductor });
-        const viajeSH = await modelViajeSH.find({...req.body, Id_Conductor: Id_Conductor });
+        let Viaje
+        let ViajeSH
+        if(req.body?.All == "True"){
+            Viaje = await modelViaje.find().all();
+            ViajeSH = await modelViajeSH.find().all();
+        }else{
+            const Id_Conductor = req.body?.Id_Conductor || req.session.userId
+            Viaje = await modelViaje.find({...req.body,  Id_Conductor: Id_Conductor });
+            ViajeSH = await modelViajeSH.find({...req.body, Id_Conductor: Id_Conductor });
+        }
 
-        if (Viaje.length > 0 && viajeSH.length > 0) {
-            res.status(200).json({"Viajes SH": viajeSH, "Viajes comunes": Viaje})
-        } else if (Viaje.length == 0 && viajeSH.length > 0) {
-            res.status(200).json({"Viajes SH": viajeSH})
-        } else if (Viaje.length > 0 && viajeSH.length == 0) {
-            res.status(200).json({"Viajes comunes": Viaje})
+        console.log(Viaje.length,  ViajeSH.length)
+        if (Viaje.length > 0 && ViajeSH.length > 0) {
+            res.status(200).json({"ViajesSH": ViajeSH, "Viajescomunes": Viaje})
+        } else if (Viaje.length == 0 && ViajeSH.length > 0) {
+            res.status(200).json({"ViajesSH": ViajeSH})
+        } else if (Viaje.length > 0 && ViajeSH.length == 0) {
+            res.status(200).json({"Viajescomunes": Viaje})
         } else {
             res.status(404).json({ message: 'No hay viajes para este conductor.' })
         }
