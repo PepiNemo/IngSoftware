@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FormImput } from "./formImput";
+import { FormImput } from "../../components/formImput";
 //import { FormImput } from "./FormImput";
-import { Foter } from "./Foter";
+import { Foter } from "../../components/Foter";
 import { useNavigate } from 'react-router-dom'
 
 

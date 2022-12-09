@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { FormImput, FormImput2 } from "./formImput";
+import { FormImput, FormImput2 } from "../../components/formImput";
 import { useNavigate } from "react-router-dom";
 
-export default function PedirViajeSH() {
+export function PedirViajeSH() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
     Id_SH: "3",

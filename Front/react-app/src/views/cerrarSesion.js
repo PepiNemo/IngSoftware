@@ -1,12 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Prin from './Principal'
+import {Principal} from './Principal'
 
 import { unSuscription } from "../Suscription/main.js"
 
+import { RolContext } from "../context/rolContext"
+
 export const CerrarSesion = () => {
     const navigate = useNavigate()
+    const {setRol} = useContext(RolContext)
+
     useEffect(() => {
         const url = "http://localhost:3300/api/logout"
     
@@ -22,11 +26,15 @@ export const CerrarSesion = () => {
                     response.json().then(json => alert(json.message))
                     navigate("/")
                 } else {
-                    response.json().then(async(json) => {await unSuscription();alert(json.message)})
+                    response.json().then(async(json) => {
+                        await unSuscription();
+                        setRol("Normal")
+                        alert(json.message)
+                    })
                     navigate("/")
                 }
             })
     }, [])
 
-    return <Prin />
+    return <Principal />
 }

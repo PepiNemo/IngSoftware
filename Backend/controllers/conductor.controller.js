@@ -10,8 +10,9 @@ import { modelViajeSH } from "../models/viajeSH.model.js"
 
 export const aceptarViaje = async (req, res) => {
     try{
-        modelViaje.updateOne({ Id_Conductor: req.session.userId, Estado_Viaje: "Solicitado"  }, { Estado_Viaje: "Aceptado" })
-        return res.status(201).json({ message: 'Has aceptado el viaje corrrectamente.'})
+        await modelViaje.findByIdAndUpdate(req.body._id , { Estado_Viaje: "Aceptado" })
+        return res.status(200).json({message: "Se ha aceptado satisfactoriamente"})
+
     }catch(e){
         res.status(400).json({error: e})
     }
@@ -19,8 +20,8 @@ export const aceptarViaje = async (req, res) => {
 
 export const aceptarViajeSH = async (req, res) => {
     try{
-        modelViajeSH.updateOne({ Id_Conductor: req.session.userId, Estado_Viaje: "Solicitado"  }, { Estado_Viaje: "Aceptado" })
-        return res.status(201).json({ message: 'Has aceptado el viaje corrrectamente.'})
+        await modelViajeSH.findByIdAndUpdate(req.body._id , { Estado_Viaje: "Aceptado" })
+        return res.status(200).json({message: "Se ha aceptado satisfactoriamente"})
     }catch(e){
         res.status(400).json({error: e})
     }
@@ -55,7 +56,6 @@ export const readViajesConductor = async (req, res) => {
             ViajeSH = await modelViajeSH.find({...req.body, Id_Conductor: Id_Conductor });
         }
 
-        console.log(Viaje.length,  ViajeSH.length)
         if (Viaje.length > 0 && ViajeSH.length > 0) {
             res.status(200).json({"ViajesSH": ViajeSH, "Viajescomunes": Viaje})
         } else if (Viaje.length == 0 && ViajeSH.length > 0) {

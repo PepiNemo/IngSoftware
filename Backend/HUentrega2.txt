@@ -32,7 +32,7 @@ Historias de usuario
 
 13.[] Administrador ve los viajes de los conductores.
 14.[X] Admins cambia el orden de prioridad de conductores. 
-15.[x] Admin define tarifas de viajes comunes 
+15.[x] Admin define tarifas de viajes comunes   
 
 --La mas dificil de hacer -----
 16.[x] Recibir una oferta de servicio con su detalle.

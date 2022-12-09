@@ -1,32 +1,35 @@
 import { EditAttributes } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
+import { FormImput, FormImput2 } from "../../components/formImput";
 import { json, useNavigate } from "react-router-dom";
-import { FormImput, FormImput2 } from "./formImput";
+import { object } from "prop-types";
 
-export default function EditarPerfilSH() {
+export function EditarPerfilConductor() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
-    Nombre_Empresa: "",
-    Rut_Empresa: "",
+    Nombre: "",
+    Rut: "",
+    Celular: "",
     Correo: "",
     Username: "",
-    Numero_Contacto: "",
   });
 
   const [Password, setPassword]= useState()
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFromValues({ ...formValues, [name]: value });
   };
 
+
   const handleChange2 = (event) => {
     const { name, value } = event.target;
     setPassword({ [name]: value });
   };
 
-  const url = "http://localhost:3300/api/stakeHolder/readStakeHolder";
-  //const url = "http://jsonplaceholder.typicode.com/users";
+
+  const url = "http://localhost:3300/api/conductor/readConductor";
 
   useEffect(() => {
     const options = {
@@ -40,8 +43,8 @@ export default function EditarPerfilSH() {
         response.json().then((json) => console.log(json));
       } else {
         response.json().then((json) => {
-          console.log(json);
-          setFromValues({ Nombre_Empresa: json.Nombre_Empresa, Rut_Empresa: json.Rut_Empresa,  Correo: json.Correo, Username: json.Username, Numero_Contacto:json.Numero_Contacto});
+          console.log(json[0]);
+          setFromValues({ Nombre:json[0].Nombre, Rut: json[0].Rut, Celular:json[0].Celular, Correo:json[0].Correo, Username:json[0].Username });
         });
       }
     });
@@ -50,12 +53,11 @@ export default function EditarPerfilSH() {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const url = "http://localhost:3300/api/stakeHolder/updateStakeHolder";
-
+    const url = "http://localhost:3300/api/conductor/updateConductor";
     const union = Object.assign(formValues, Password)
     console.log(JSON.stringify(union));
     const options = {
-      method: "PATCH",
+      method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(union),
@@ -78,8 +80,9 @@ export default function EditarPerfilSH() {
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold"></span>
-              <div className="mt-5 text-center"></div>
+              <span className="font-weight-bold">Conductor</span>
+              <div className="mt-5 text-center">
+              </div>
 
               <span> </span>
             </div>
@@ -87,61 +90,50 @@ export default function EditarPerfilSH() {
           <div className="col-md-5 border-right">
             <div className="p-3 py-5">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h4 className="text-right">Editar Perfil</h4>
+                <h4 className="text-right">Editar Perfil de Conductor</h4>
               </div>
-
               <div className="row mt-2">
                 <FormImput2
-                  label="Nombre de la Empresa"
+                  label="Nombre Conductor"
                   type="text"
-                  name="Nombre_Empresa"
-                  placeholder="Nombre_Empresa"
+                  name="Nombre"
+                  placeholder=""
                   onChange={handleChange}
-                  value={formValues.Nombre_Empresa}
+                  value={formValues.Nombre}
                 />
               </div>
               <div className="row mt-3">
                 <FormImput2
+                  label="Rut"
+                  type="text"
+                  name="Rut"
+                  onChange={handleChange}
+                  placeholder=""
+                  value={formValues.Rut}
+                />
+
+                <FormImput2
+                  label="Numero de contacto"
+                  type="text"
+                  name="Celular"
+                  onChange={handleChange}
+                  placeholder=""
+                  value={formValues.Celular}
+                />
+
+                <FormImput2
                   label="Nombre de Usuario"
                   type="text"
-                  name="username"
+                  name="Username"
                   onChange={handleChange}
                   placeholder=""
                   value={formValues.Username}
                 />
-
                 <FormImput2
                   label="Contraseña"
                   type="password"
                   name="Password"
                   onChange={handleChange2}
-                />
-
-                <FormImput2
-                  label="Rut de la Empresa"
-                  type="text"
-                  name="Rut_Empresa"
-                  onChange={handleChange}
-                  placeholder=""
-                  value={formValues.Rut_Empresa}
-                />
-
-                <FormImput2
-                  label="Correo"
-                  type="text"
-                  name="Correo"
-                  onChange={handleChange}
-                  placeholder="Ingrese numero de Correo"
-                  value={formValues.Correo}
-                />
-
-                <FormImput2
-                  label="Numero de Contacto"
-                  type="text"
-                  name="Numero_Contacto"
-                  onChange={handleChange}
-                  placeholder=""
-                  value={formValues.Numero_Contacto}
                 />
               </div>
 

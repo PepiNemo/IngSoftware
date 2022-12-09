@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FormImput2 } from "./formImput";
+import { FormImput2 } from "../../components/formImput";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //const url = "http://jsonplaceholder.typicode.com/users"
 
-export default function Readtari() {
+export function Readtari() {
   useEffect(() => {
     const url = "http://localhost:3300/api/tarifa/readTarifa";
     const options = {

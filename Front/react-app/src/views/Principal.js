@@ -1,7 +1,8 @@
-import React from "react";
-import { Foter } from "./Foter";
 
-const Prin = () => {
+import { Foter } from "../components/Foter";
+
+export const Principal = () => {
+
   return (
     <div className="principal">
       <div
@@ -139,4 +140,3 @@ const Prin = () => {
   );
 };
 
-export default Prin;

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FormImput2 } from "./formImput";
+import { FormImput2 } from "../../components/formImput";
 import CrearConductor from "./CrearConductor";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const url = "http://localhost:3300/api/admin/readConductors";
 //const url = "http://jsonplaceholder.typicode.com/users"
 
-export default function VerConductores() {
+export function VerConductores() {
   useEffect(() => {
     const options = {
       method: "GET",

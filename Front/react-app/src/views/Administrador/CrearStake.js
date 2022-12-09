@@ -1,11 +1,11 @@
 import { ClassNames } from "@emotion/react";
 import { ForkRight } from "@mui/icons-material";
 import React, { useState } from "react";
-import { FormImput, FormImput2 } from "./formImput.js";
+import { FormImput, FormImput2 } from "../../components/formImput.js";
 import { useNavigate } from 'react-router-dom'
 //import "./App.css";
 
-function AgregarStake() {
+export function CrearStake() {
   const navigate = useNavigate()
   const [formValues, setFromValues] = useState({
     Nombre_Empresa: "",
@@ -110,4 +110,4 @@ function AgregarStake() {
     </div>
   );
 }
-export default AgregarStake;
+

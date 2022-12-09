@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { FormImput2 } from "./formImput";
+import { FormImput2 } from "../../components/formImput";
 
-export default function UpdateViajeSH() {
+export function UpdateViajeSH() {
   const [formValues, setFromValues] = useState({
     Id_ViajeSH: "Direccion_Origen1",
     Id_Value: "",

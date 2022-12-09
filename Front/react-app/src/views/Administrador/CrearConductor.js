@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 
 
-const CrearConductor =() =>{
+export const CrearConductor =() =>{
     const navigate = useNavigate()
     const [formValues, setFromValues] = useState({
         Nombre: "",
@@ -149,4 +149,3 @@ const CrearConductor =() =>{
     );
   }
   
-  export default CrearConductor;

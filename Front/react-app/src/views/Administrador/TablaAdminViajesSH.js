@@ -1,16 +1,20 @@
 
 import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
+const url = "http://localhost:3300/api/admin/readViajesSHAdmin"
+//const url = "http://jsonplaceholder.typicode.com/users"
 
-
-export default function SHMisViajes () {
-    const [viajesSH, setViajesSH] = useState()
+export function AdminViajesSH(){ 
+    const navigate = useNavigate()
+    const [ViajesSH, setViajesSH] = useState()
+    const [Nombre_Empresa, setNombre_Empresa] = useState()
 
 
     const handleChange = (event) => {
         console.log(event.target.value)
-        setViajesSH(event.target.value);
+        setNombre_Empresa(event.target.value);
       };
 
     const onSubmit = (event) => {
@@ -19,8 +23,6 @@ export default function SHMisViajes () {
     };
 
     useEffect(()=>{
-        const url = "http://localhost:3300/api/stakeHolder/readViajesSH"
-
         const options = {
             method: 'POST',
             credentials: 'include',
@@ -29,36 +31,41 @@ export default function SHMisViajes () {
     
         fetch(url,options)
             .then(response => response.json())
-            .then(data =>  mostrarData(data))
+            .then(data => {setViajesSH(data); mostrarData(data)})
             .catch(error => console.log(error))
     }, [])
 
 
 
 
-    const mostrarData = (data) =>{
+    const mostrarData = (data=ViajesSH, filter=Nombre_Empresa) =>{
+        console.log(data)
+        if(filter!=null){
+            data = data.filter(stake => stake.Nombre_Empresa == filter)
+        }
         
         let tbody =''
         for(let i=0;i<data.length;i++){
-            tbody+=`<tr><td>Viaje SH</td><td>${data[i].Estado_Viaje}</td><td>${data[i].Nombre_Empresa}</td><td>${data[i].Nombre_StakeHolder}</td></tr>`
+            tbody+=`<tr><td>${data[i].Nombre_Empresa}</td><td>${data[i].Nombre_StakeHolder}</td><td>${data[i].Direccion_Destino1}</td><td>${data[i].Numero_Pasajeros}</td></tr>`
 
-        }
-        document.getElementById('data').innerHTML = tbody 
+        } 
+        document.getElementById('data').innerHTML = tbody
     }
     return(
         <div className='container'>
                 <form >
-                  
+                    <input onChange={handleChange} type="text" placeholder='Buscar Empresa' className='form-control'/>
+                    <button className="btn btn-primary" onClick={onSubmit}>Filtrar</button>
                 </form>
                 <div className='row'>
                     <div className='col'>
                         <table className='table'>
                             <thead className='table-primary'>
                                 <tr>
-                                    <th>Tipo de viaje</th>
-                                    <th>Estado</th>
                                     <th>Nombre Empresa</th>
-                                    <th>Nombre SH</th>
+                                    <th>Nombre del StakeHolder solicitante</th>
+                                    <th>Direccion de destino</th>
+                                    <th>Numero de pasajeros</th>
                         
                                 </tr>
                             </thead>
@@ -76,7 +83,6 @@ export default function SHMisViajes () {
         
 
     )
-
     
         
 }

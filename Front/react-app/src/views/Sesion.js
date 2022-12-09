@@ -1,11 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import  { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Suscription} from "../Suscription/main.js"
 
+import { RolContext } from "../context/rolContext"
 
-export default function Sesion() {
+
+export function Sesion() {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
@@ -13,7 +14,11 @@ export default function Sesion() {
     Password: "",
   });
   
-  const [rol, setRol] = useState("hola");
+  const {rol, setRol} = useContext(RolContext)
+
+  useEffect(()=> {
+    console.log("Nuevo Rol", rol)
+  },[rol])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,12 +44,13 @@ export default function Sesion() {
         response.json().then((json) => alert(json.message));
       } else {
         response.json().then(async (json) => {
-          setRol(json.Rol)
+          await setRol(json.Rol)
           alert(json.message);
           if(json.Rol == "conductor" || json.Rol=="admin"){
             await Suscription()
           }
-          setRol((state) => {console.log(state);navigate("/");return state})   
+          //setRol((state) => {console.log(state);navigate("/");return state})   
+          navigate("/")
         })
 
       }
