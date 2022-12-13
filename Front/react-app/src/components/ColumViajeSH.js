@@ -28,28 +28,6 @@ export function ColumViajeSH(props){
             .catch(error => console.log(error))
     }
 
-/*     const ActualizarViaje = (event) => {
-        event.preventDefault()
-        const url = "http://localhost:3300/api/stakeHolder/updateViajeSH";
-        console.log(JSON.stringify(formValues));
-        const options = {
-          method: "PATCH",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(formValues),
-        };
-    
-        fetch(url, options).then((response) => {
-          if (!response.ok) {
-            alert("Codigo de error desde el servidor");
-            response.json().then((json) => alert(json.message));
-          } else {
-            response.json().then((json) => alert(json.message));
-            //navigate("/");
-          }
-        });
-    } */
-
     return(
     <tr>
         {(props.Rol == "conductor")?<td>{props.Nombre_Empresa}</td>: null}
@@ -66,6 +44,18 @@ export function ColumViajeSH(props){
         {
             (props.Aceptar == "True")
             ?<td><a className="btn btn btn-primary" onClick={AceptarViaje} >Aceptar</a></td>
+            : null
+        }
+
+        {
+            (props?.EditarViajeSH)
+            ?<td><a className="btn btn btn-primary" onClick={() => props.EditarViajeSH(props._id)}>Editar</a></td>
+            : null
+        }
+
+        {
+            (props?.EliminarViajeSH)
+            ?<td><a className="btn btn btn-danger" onClick={() => props.EliminarViajeSH(props._id)}>Eliminar</a></td>
             : null
         }
         

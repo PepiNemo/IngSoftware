@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import { ColumViaje } from '../../components/ColumViajeConductor'
+import { ColumViaje } from '../../components/ColumViaje'
 import { ColumViajeSH } from '../../components/ColumViajeSH'
 
 

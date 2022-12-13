@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { ColumViaje } from '../../components/ColumViajeConductor'
+import { ColumViaje } from '../../components/ColumViaje'
 import { ColumViajeSH } from '../../components/ColumViajeSH'
 
 

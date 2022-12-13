@@ -19,10 +19,9 @@ import { EditarPerfilConductor } from './views/Conductor/EditarCon';
 
 import { CrearStake } from './views/Administrador/CrearStake';
 import { CrearConductor} from './views/Administrador/CrearConductor';
-import {AgregarTarifa} from './views/Administrador/AgregarTarifa';
+import { Tarifas} from './views/Administrador/Tarifas';
 import { VerConductores } from './views/Administrador/TablaAdminCon';
 import {AdminViajesSH} from './views/Administrador/TablaAdminViajesSH';
-import {Readtari} from './views/Administrador/Readtari';
 import { BorrarStake } from "./views/Administrador/BorrarStake"
 
 
@@ -55,9 +54,7 @@ function App() {
             <Route path="/EditarPerfilSH" element={<EditarPerfilSH />} />
             <Route path="/TablaMisViajesSH" element={<SHMisViajes />} />
 
-            <Route path="/Readtari" element={<Readtari />} />
-
-            <Route path="/AgregarTarifa" element={<AgregarTarifa />} />
+            <Route path="/Tarifas" element={<Tarifas />} />
 
             <Route path="/EditarPerfilConductor" element={<EditarPerfilConductor />} />
             <Route path="/TablaMisViajesConductor" element={<ConductorMisViajesAceptados />} />
@@ -65,7 +62,6 @@ function App() {
 
             <Route path="/EliminarStake" element={<BorrarStake />} />
 
-            <Route path="/UpdateViajeSH" element={<UpdateViajeSH />} />
 
             <Route path="/CrearConductor" element={<CrearConductor />} />
             <Route path="/CrearStake" element={<CrearStake />} />

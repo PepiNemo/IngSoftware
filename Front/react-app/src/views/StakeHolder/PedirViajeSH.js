@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { FormImput, FormImput2 } from "../../components/formImput";
+import { useState } from "react";
+import { FormImput, FormImput2, FormImputSeleccion } from "../../components/formImput";
 import { useNavigate } from "react-router-dom";
 
 export function PedirViajeSH() {
   const navigate = useNavigate();
   const [formValues, setFromValues] = useState({
-    Id_SH: "3",
+    Id_SH: "",
     Direccion_Origen1: "",
     Direccion_Destino1: "",
     Fecha_Hora_Inicio: "",
@@ -48,11 +48,6 @@ export function PedirViajeSH() {
     setFromValues({ ...formValues, [name]: value });
   };
 
-  const changeFunc = () => {
-    var selectBox = document.getElementById("tamaño");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    setFromValues({ ...formValues, [formValues.t_equi]: selectedValue });
-  };
 
   return (
     <div className="basty">
@@ -67,14 +62,14 @@ export function PedirViajeSH() {
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput
             label="Nombre del pasajero representante"
             type="text"
             name="Nombre_Pasajero_Representante"
             onChange={handleChange}
           />
 
-          <FormImput2
+          <FormImput
             label="Numero de contacto del pasajero representante"
             type="text"
             name="Celular_Pasajero_Representante"
@@ -116,33 +111,26 @@ export function PedirViajeSH() {
             onChange={handleChange}
           />
 
-          <FormImput
-            label="Cantidad de Pasajeros"
-            type="text"
+          <FormImputSeleccion
+            label="Numero de Pasajeros"
+            id="Numero_Pasajeros"
             name="Numero_Pasajeros"
+            className="form-select"
+            value={formValues.Numero_Pasajeros}
             onChange={handleChange}
+            options={[1,2,3,4]}
           />
 
-          <div className="col-12">
-            <label
-              for="Tamaño_Equipaje"
-              htmlFor="inputState"
-              className="form-label"
-            >
-              Tamaño de maletas
-            </label>
-            <select
-              id="Tamaño_Equipaje"
-              className="form-select"
-              onChange={changeFunc}
-            >
-              <option value="Pequeña"> Pequeña </option>
-              <option value="Mediana"> Mediana </option>
-              <option value="Grande"> Grande </option>
-            </select>
-          </div>
+          <FormImputSeleccion
+            label="Tamaño de las Maletas"
+            id="Tamaño_Maletas" 
+            name="Tamaño_Maletas"
+            value={formValues.Tamaño_Maletas}
+            onChange={handleChange}
+            options={["Pequeña", "Mediana", "Grande"]}
+          />
 
-          <FormImput2
+          <FormImput
             label="Detalles extras del viaje"
             type="text"
             name="Detalles_Extras"

@@ -14,7 +14,12 @@ export const createViaje = async (req, res) => {
         //Loop de ofrecimiento
         modelConductor.countDocuments().then(async(count_documents) => {
             const {idConductorPrioritario, menorPrioridad} =  await conductorPrioritario();
-            const viaje = await modelViaje.create({...req.body, Id_Conductor:idConductorPrioritario})
+            try{
+                const viaje = await modelViaje.create({...req.body, Id_Conductor:idConductorPrioritario})
+                res.status(201).json({message: 'Viaje solicitado.'})
+            }catch (e){
+                return res.status(400).json({error: e.message})
+            }
             await SendNotification(menorPrioridad);
             let lastMenorPrioridad = menorPrioridad
             await timer(60000);
@@ -53,16 +58,11 @@ export const createViaje = async (req, res) => {
             
 
         }).catch((err) => {
-            return res.status(400).json(err.Message)
+            return res.status(400).json({error: err.Message})
         })  
 
-
-        return res.status(201).json({message: 'Viaje solicitado.'})
-
-
-        
     }catch(e){
-        return res.status(400).json({ error: e})
+        return res.status(400).json({ error: e.message})
     }
     
 }

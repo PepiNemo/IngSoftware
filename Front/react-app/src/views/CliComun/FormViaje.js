@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { FormImput } from "../../components/formImput";
-//import { FormImput } from "./FormImput";
-import { Foter } from "../../components/Foter";
 import { useNavigate } from 'react-router-dom'
+
+
+import { FormImput, FormImput2, FormImputSeleccion } from "../../components/formImput";
+import { Foter } from "../../components/Foter";
+import { Fetch } from "../../services/Fetch"
 
 
 function FormViaje() {
@@ -21,66 +23,28 @@ function FormViaje() {
     Estado_Viaje: "Solicitado"
   });
   
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const url = "http://localhost:3300/api/pasajero/createViaje"
 
-    console.log(JSON.stringify(formValues))
-    const options = {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(formValues)
-    }
+    const {codigoResponse, message } = await Fetch(url, "POST", formValues);
+    alert(message);
 
-    fetch(url, options)
-      .then(response => {
-        if (!response.ok) {
-          alert("Codigo de error desde el servidor")
-          response.json().then(json => {
-            if(json?.message){
-              alert(json.message)
-            }
+    if(codigoResponse == "201"){navigate("/")}
 
-            alert(json.error.message)
-          })
-        }
-        else {
-
-          response.json().then(json => alert(json.message));
-          navigate("/")
-        }
-    })
-    .catch(e => {
-      alert("Error")
-      console.log(e)
-    })
   };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFromValues({ ...formValues, [name]: value });
   };
-  
-  const changeFunc = () => {
-    var selectBox = document.getElementById("Tamaño_Maletas");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    setFromValues({ ...formValues, Tamaño_Maletas: selectedValue });
-  };
-  
-  const changeFunc2 = () => {
-    var selectBox = document.getElementById("Numero_Pasajeros");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    setFromValues({ ...formValues, Numero_Pasajeros: selectedValue });
-  };
+
 
   return (
     <div className="basty">
       <div className="container">
         <span className="title"> Formulario General</span>
         <form className="row g-3">
-
-          
 
           <FormImput
             label="Nombre del pasajero"
@@ -89,12 +53,28 @@ function FormViaje() {
             onChange={handleChange}
           />
 
-          <FormImput 
+          <FormImput
+            label="Telefono de contacto"
+            type="text"
+            name="Celular"
+            onChange={handleChange}
+          />
+
+          <FormImput
             label="Email" 
             type="email" 
             name="Correo" 
             onChange={handleChange} 
             />
+
+          <FormImputSeleccion
+            label="Numero de Pasajeros"
+            id="Numero_Pasajeros"
+            name="Numero_Pasajeros"
+            value={formValues.Numero_Pasajeros}
+            onChange={handleChange}
+            options={[1,2,3,4]}
+          />
 
           <FormImput
             label="Direccion de Origen"
@@ -110,10 +90,11 @@ function FormViaje() {
             onChange={handleChange}
           />
 
+
           <FormImput
-            label="Telefono de contacto"
+            label="Hora de inicio"
             type="text"
-            name="Celular"
+            name="Hora_Inicio"
             onChange={handleChange}
           />
 
@@ -124,12 +105,6 @@ function FormViaje() {
             onChange={handleChange}
           />
 
-          <FormImput
-            label="Hora de inicio"
-            type="text"
-            name="Hora_Inicio"
-            onChange={handleChange}
-          />
 
           <FormImput
             label="Numero de Maletas"
@@ -138,43 +113,27 @@ function FormViaje() {
             onChange={handleChange}
           />
 
-          <div className="col-md-6">
-            <label
-              for="Numero de Pasajeros"
-              htmlFor="inputState"
-              className="form-label"
-            >
-              Numero de Pasajeros
-            </label>
-            <select
-              id="Numero_Pasajeros"
-              className="form-select"
-              onChange={changeFunc2}
-            >
-              <option value="0"> 0 </option>
-              <option value="1"> 1 </option>
-              <option value="2"> 2 </option>
-              <option value="3"> 3 </option>
-              <option value="4"> 4 </option>
-            </select>
-          </div>
 
-          <div className="col-md-6">
-            <label for="Tamaño_Maletas" htmlFor="inputState" className="form-label">
-              Tamaño de las Maletas
-            </label>
-            <select id="Tamaño_Maletas" className="form-select" defaultValue={"Mediana"} onChange={changeFunc}>
-              <option value="Pequeña"> Pequeña </option>
-              <option value="Mediana"> Mediana </option>
-              <option value="Grande"> Grande </option>
-            </select>
-          </div>
+
+
+          <FormImputSeleccion
+            label="Tamaño de las Maletas"
+            id="Tamaño_Maletas" 
+            name="Tamaño_Maletas"
+            value={formValues.Tamaño_Maletas}
+            onChange={handleChange}
+            options={["Pequeña", "Mediana", "Grande"]}
+          />
+
+
 
           <div className="col-12">
             <button className="btn btn-primary" onClick={onSubmit}>
               Enviar
             </button>
           </div>
+
+
         </form>
       </div>
 

@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 
-import { RolProvider, RolContext } from "../context/rolContext"
+import { RolContext } from "../context/rolContext"
 
 
 export function NavBar() {
 
   const { rol } = useContext(RolContext)
-
 
   const OnClick = () => {
     console.log(rol)
@@ -71,24 +70,14 @@ export function NavBar() {
                     <Link className="nav-link text-light" to="/EliminarStake">Eliminar Stake</Link>
                     <Link className="nav-link text-light" to='/CrearConductor'>Crear Conductor</Link>
                     <Link className="nav-link text-light" to='/CrearStake'>Crear StakeHolder</Link>
-                    <Link className="nav-link text-light" to='/TablaAdminCon'>Ver Conductores</Link>
+                    <Link className="nav-link text-light" to='/TablaAdminCon'>Conductores</Link>
+
                     <Link className="nav-link text-light" to='/TablaAdminViajesSH'>Viajes De SH</Link>
-                    <Link className="nav-link text-light" to="/AgregarTarifa">Agregar Tarifa</Link>
-                    <Link className="nav-link text-light" to="/UpdateViajeSH">UpVSH</Link>
+                    <Link className="nav-link text-light" to="/Tarifas"> Tarifas </Link>
                     <Link className="nav-link text-light" to='/Logout'>Cerrar Sesion</Link>
                   </>
                   : null
               }
-
-
-
-
-
-
-              {/* <Link className="nav-link text-light" to='/Verviajes'>VerViajes</Link> */}
-
-
-
             </div>
           </div>
         </div>
