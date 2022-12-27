@@ -37,7 +37,7 @@ export function AdminViajesSH() {
         console.log(ViajesSH)
     }, [update])
 
-    ///States and functinos of update ViajeSH
+    ///States and functions of update ViajeSH
     const [formActive, setFormActive] = useState(false)
     const [idViajeSH, setID] = useState()
     const [formValues, setFromValues] = useState();

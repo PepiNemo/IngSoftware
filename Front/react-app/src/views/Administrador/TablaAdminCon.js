@@ -1,138 +1,97 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { FormImput2 } from "../../components/formImput";
-import CrearConductor from "./CrearConductor";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const url = "http://localhost:3300/api/admin/readConductors";
-//const url = "http://jsonplaceholder.typicode.com/users"
+import { ColumConductor } from "../../components/ColumConductor";
+import { FormCrearConductor } from "../../components/FormCrearConductor"
+
+import { Fetch } from "../../services/Fetch"
 
 export function VerConductores() {
+
+  const [conductores, setConductores] = useState([])
+  const [conductor, setConductor] = useState({})
+  const [formActive, setFormActive] = useState(false)
+  const [updateOrCreate, setUpdateCreate] = useState("")
+
+
   useEffect(() => {
-    const options = {
-      method: "GET",
-      credentials: "include",
-      headers: { "Content-type": "application/json" },
-    };
+    const readConductors = "http://localhost:3300/api/admin/readConductors";
+    Fetch(readConductors, "GET")
+      .then(response => {
+        if (response?.message) { alert(response.message) }
+        if (response?.codigoResponse == "200") { setConductores(response.data) }
+      })
+  }, [conductor]);
 
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => mostrarData(data))
-      .catch((error) => console.log(error));
-  }, []);
+  const CreateConductor = async () => {
+    setFormActive(true)
+    setUpdateCreate("create")
+  }
 
-  const mostrarData = (data) => {
-    console.log(data);
-    let tbody = "";
-    for (let i = 0; i < data.length; i++) {
-      tbody += `<tr><td>${data[i].Nombre}</td><td>${data[i].Username}</td><td>${data[i].Celular}</td><td>${data[i].Prioridad}</td></tr>`;
+  const SaveCrearConductor = async (conductor) => {
+    const createConductor = "http://localhost:3300/api/admin/CreateConductor" //POST
+    console.log("save ", conductor)
+    const response = await Fetch(createConductor, "POST", conductor)
+    if (response?.message?.message){alert(response.message.message)}
+    else if (response?.message[0]?.message) { alert(response.message[0].message) }
+    else if (response?.message) { alert(response.message) }
+    if(response?.codigoResponse == "201"){
+      setConductor({})
+      setFormActive(false)
     }
-    document.getElementById("data").innerHTML = tbody;
-  };
+  
+  }
 
-  // seba
-  const [formValues, setFromValues] = useState({
-    Username: "",
-  });
+  const EditarConductor = async (_id) => {
+    const readConductor = "http://localhost:3300/api/admin/readConductor";
+    let response = await Fetch(readConductor, "POST", { _id })
+    if (response?.message) { alert(response.message) }
+    if (response?.data) {
+        let data = response.data[0]
+        delete data.Password
+        setConductor(data)
+        setUpdateCreate("update")
+        setFormActive(true)
+    }
+  }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFromValues({ ...formValues, [name]: value });
-  };
+  const SaveEditarConductor = async (_id, conductor) => {
+    const updateConductor = "http://localhost:3300/api/admin/updateConductor";//PATCH
+    console.log("Save editando : ",_id)
+    const response = await Fetch(updateConductor, "PATCH", { 
+      Id_Conductor: "_id",
+      Id_Value: _id,
+      ...conductor
+    })
+    if (response?.message) { alert(response.message) }
+    console.log(conductor)
+    setConductor({})
+    setFormActive(false)
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const url = "http://localhost:3300/api/admin/removeConductor";
+  }
 
-    console.log(JSON.stringify(formValues));
-    const options = {
-      method: "DELETE",
-      credentials: "include",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formValues),
-    };
+  const DeshabilitarConductor = async (_id, Prioridad) => {
+    const updateConductor = "http://localhost:3300/api/admin/updateConductor";//PATCH
+    console.log("Deshabilitando : ",_id)
+    const response = await Fetch(updateConductor, "PATCH", { 
+      Id_Conductor: "_id",
+      Id_Value: _id,
+      Prioridad: Prioridad *-1
+    })
+    if (response?.message) { alert(response.message) }
+    setConductor({})
+  }
 
-    fetch(url, options).then((response) => {
-      if (!response.ok) {
-        alert("Codigo de error desde el servidor");
-        response.json().then((json) => alert(json.message));
-      } else {
-        response.json().then((json) => alert(json.message));
-        //navigate("/");
-      }
-    });
-  };
+  const EliminarConductor = async (_id) => {
+    const removeConductor = "http://localhost:3300/api/admin/removeConductor";//Delete
+    const response = await Fetch(removeConductor, "DELETE", {"_id": _id})
+    if (response?.message) { alert(response.message) }
+    setConductor({})
+  }
 
-  const [formValues2, setFromValues2] = useState({
-    Id_Conductor: "Username",
-    Id_Value: "",
-    Prioridad: "",
-  });
-
-  const onSubmit2 = (event) => {
-    event.preventDefault();
-    const url = "http://localhost:3300/api/admin/updateConductor";
-
-    console.log(JSON.stringify(formValues2));
-    const options = {
-      method: "PATCH",
-      credentials: "include",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formValues2),
-    };
-
-    fetch(url, options).then((response) => {
-      if (!response.ok) {
-        alert("Codigo de error desde el servidor");
-        response.json().then((json) => alert(json.message));
-      } else {
-        response.json().then((json) => alert(json.message));
-        //navigate("/");
-      }
-    });
-  };
-
-  const handleChange2 = (event) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    setFromValues2({ ...formValues2, [name]: value });
-  };
 
   return (
     <div>
       <div className="container">
-        
-        <div className="container">
-          <FormImput2
-            label="Nombre de usuario del conductor a eliminar"
-            type="text"
-            name="Username"
-            onChange={handleChange}
-          />
-          <button className="btn btn-danger" type="button" onClick={onSubmit}>
-            Eliminar
-          </button>
-        </div>
-
-        <div className="container">
-          <FormImput2
-            label="Ingrese el Nombre de Usuario del Conductor"
-            type="text"
-            name="Id_Value"
-            onChange={handleChange2}
-          />
-
-          <FormImput2
-            label="Ingrese la prioridad negativa para deshabilitar conductor"
-            type="text"
-            name="Prioridad"
-            onChange={handleChange2}
-          />
-
-          <button className="btn btn-secondary" type="button" onClick={onSubmit2}>
-            Cambiar Prioridad
-          </button>
-        </div>
 
         <div className="row">
           <div className="col">
@@ -143,12 +102,58 @@ export function VerConductores() {
                   <th>Username</th>
                   <th>Celular</th>
                   <th>Prioridad</th>
+                  <th>Editar</th>
+                  <th>Deshabilitar</th>
+                  <th>Eliminar</th>
                 </tr>
               </thead>
-              <tbody id="data"></tbody>
+              <tbody id="data">
+                {
+                  (conductores != [])
+                    ? conductores.map(conductor => {
+                      return <ColumConductor
+                        key={conductor._id}
+                        EditarConductor={EditarConductor}
+                        DeshabilitarConductor={DeshabilitarConductor}
+                        EliminarConductor={EliminarConductor}
+                        {...conductor}
+                      />
+                    })
+                    : null
+                }
+              </tbody>
             </table>
           </div>
         </div>
+      </div>
+      <div>
+        {
+          (formActive == false)
+          ?<a className="btn btn-info" onClick={CreateConductor}>Crear un nuevo conductor</a>
+          : null
+        }
+
+        {
+          (formActive == true && updateOrCreate=="update")
+            ? <div className="container"> 
+              <h2> Editar Conductor</h2> <FormCrearConductor SaveEditarConductor={SaveEditarConductor} {...conductor} />  
+              </div>
+            : null
+        }
+
+        {
+          (formActive == true && updateOrCreate=="create")
+            ? <div className="container">
+              <h2> Crear Conductor</h2> 
+              <div> <FormCrearConductor SaveCrearConductor={SaveCrearConductor}/>  </div>
+              </div>
+            : null
+        }
+
+      </div>
+
+      <div >
+        
       </div>
     </div>
   );

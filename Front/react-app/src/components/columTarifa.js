@@ -1,9 +1,4 @@
-import {Fetch} from "../services/Fetch"
-
-
 export function ColumnaTarifa(props) {
-
-
     return (
         <tr>
             <td>{props.Lugar}</td>

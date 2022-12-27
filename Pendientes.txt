@@ -1,0 +1,13 @@
+1.-[] Unificar los message provenientes desde el backend 
+    ->Probblema en el Front.
+    if (response?.message?.message){alert(response.message.message)}
+    else if (response?.message[0]?.message) { alert(response.message[0].message) }
+    else if (response?.message) { alert(response.message) }
+    if(response?.codigoResponse == "201"){
+      setConductor({})
+      setFormActive(false)
+    }
+
+2.- Eliminar disableConductor del backend?
+
+3.- Unificar creare, update, remove SH en una tabla tal como esta en Conductores.

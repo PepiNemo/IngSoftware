@@ -153,7 +153,7 @@ export const removeConductor = async (req, res) => {
         if (Object.keys(req.body).length > 0) {
             const remove = await modelConductor.deleteOne({...req.body});
             (remove.deletedCount == 1)
-                ? res.status(204).json({ message: "Eliminado correctamente" })
+                ? res.status(200).json({ message: "Eliminado correctamente" })
                 : res.status(404).json({ message: "No se ha encontrado el conductor" })
         }
         else {

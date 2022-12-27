@@ -1,7 +1,24 @@
-import {FormImput, FormImput2, FormImputSeleccion } from "./formImput"
+import { useState } from "react"
+import {FormImput } from "./formImput"
 
 
 export function FormCrearConductor(props) {
+    const [conductor, setConductor] = useState({
+        "Nombre": props.Nombre,
+        "Rut": props.Rut,
+        "Username": props.Username,
+        "Password": props.Password,
+        "Correo": props.Correo,
+        "Celular": props.Celular,
+        "Prioridad": props.Prioridad,
+        "Imagen_URL": "www.google.com"
+    })
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setConductor({ ...conductor, [name]: value });
+    };
+
     return (
         <form className="row g-3" >
 
@@ -9,8 +26,8 @@ export function FormCrearConductor(props) {
                 label="Nombre del conductor"
                 type="text"
                 name="Nombre"
-                value={props.Nombre}
-                onChange={props.handleChange}
+                value={conductor.Nombre}
+                onChange={handleChange}
             />
 
 
@@ -18,24 +35,24 @@ export function FormCrearConductor(props) {
                 label="Rut del Conductor"
                 type="text"
                 name="Rut"
-                value={props.Rut}
-                onChange={props.handleChange}
+                value={conductor.Rut}
+                onChange={handleChange}
             />
 
             <FormImput 
                 label="Username"
                 type="text"
                 name="Username"
-                value={props.Username}
-                onChange={props.handleChange}
+                value={conductor.Username}
+                onChange={handleChange}
             />
 
             <FormImput 
                 label="Password"
                 type="password"
-                name="Username"
-                value={props.Password}
-                onChange={props.handleChange}
+                name="Password"
+                value={conductor.Password}
+                onChange={handleChange}
             />
 
 
@@ -43,8 +60,8 @@ export function FormCrearConductor(props) {
                 label="Correo electronico"
                 type="text"
                 name="Correo"
-                value={props.Correo}
-                onChange={props.handleChange}
+                value={conductor.Correo}
+                onChange={handleChange}
             />
 
 
@@ -54,8 +71,8 @@ export function FormCrearConductor(props) {
                 type="text"
                 placeholder="Ejemplo: +56979826650"
                 name="Celular"
-                value={props.Celular}
-                onChange={props.handleChange}
+                value={conductor.Celular}
+                onChange={handleChange}
             />
 
 
@@ -63,15 +80,25 @@ export function FormCrearConductor(props) {
                 label="Prioridad"
                 type="number"
                 name="Prioridad"
-                value={props.Prioridad}
-                onChange={props.handleChange}
+                value={conductor.Prioridad}
+                onChange={handleChange}
             />
 
 
             <div className="col-12">
-                <button type="submit" className="btn btn-primary">
-                    Enviar
-                </button>
+                {
+                    (props?.SaveEditarConductor)
+                        ? <a className="btn btn-primary" onClick={()=> props.SaveEditarConductor(props._id, conductor)}>Actualizar</a>
+                        : null
+                }
+
+                {
+                    (props?.SaveCrearConductor)
+                        ? <a className="btn btn-primary" onClick={()=> props.SaveCrearConductor(conductor)}>Crear</a>
+                        : null
+                }
+
+                
             </div>
         </form>
     )

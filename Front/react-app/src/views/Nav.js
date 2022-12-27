@@ -54,7 +54,7 @@ export function NavBar() {
               }
 
               {
-                (rol == "conductor" || rol == "admin")
+                (rol == "conductor" )
                   ? <>
                     <Link className="nav-link text-light" to='/EditarPerfilConductor'>Editar Perfil </Link>
                     <Link className="nav-link text-light" to='/TablaMisViajesConductor'>Mis Viajes</Link>
@@ -66,10 +66,11 @@ export function NavBar() {
               {
                 (rol == "admin")
                   ? <>
+                    <Link className="nav-link text-light" to='/EditarPerfilConductor'>Editar Perfil </Link>
+                    <Link className="nav-link text-light" to='/TablaMisViajesConductor'>Mis Viajes</Link>
+                    <Link className="nav-link text-light" to='/MisViajesSolicitadosConductor'>Mis Viajes Solicitados</Link>
 
-                    <Link className="nav-link text-light" to="/EliminarStake">Eliminar Stake</Link>
-                    <Link className="nav-link text-light" to='/CrearConductor'>Crear Conductor</Link>
-                    <Link className="nav-link text-light" to='/CrearStake'>Crear StakeHolder</Link>
+                    <Link className="nav-link text-light" to='/TablaAdminSH'>Stake Holders</Link> 
                     <Link className="nav-link text-light" to='/TablaAdminCon'>Conductores</Link>
 
                     <Link className="nav-link text-light" to='/TablaAdminViajesSH'>Viajes De SH</Link>
